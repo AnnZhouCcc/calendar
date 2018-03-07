@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="591fba3a-869b-4d99-8c69-fa76874430a2" kpf_version="5" name="Calendar.komodoproject">
+<file id="0d7ca69f-a6a7-46bc-b467-12a07f8bcbc6" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="groupController.js" url="groupController.js">
+</file>
 <file id="2c24cfc6-6eae-4399-81f7-d8d59770e6f0" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="Group.php" url="Group.php">
+</file>
+<file id="48a11bcf-62d5-4274-bf05-37ec5b952b6a" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="eventController.php" url="eventController.php">
 </file>
 <file id="6025fea2-7add-4298-b679-593cb0544240" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="global.php" url="global.php">
 </file>
+<file id="650d5837-5dc8-4b82-b495-61cd7f67da54" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="eventController.js" url="eventController.js">
+</file>
 <file id="78d3cccd-4402-4a1b-a525-2d533a7ea70d" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="Event.php" url="Event.php">
+</file>
+<file id="7fab6997-4a70-4d14-966c-0a5b28e1dac3" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="userController.js" url="userController.js">
 </file>
 <file id="87a24cd0-5bf9-4f95-ab01-2fe91e63d057" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="index.php" url="index.php">
 </file>
-<file id="c1cf4e5d-45fb-4e9e-830c-76890dda3ce2" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="groupController.php" url="groupController.php">
+<file id="96118bdb-b262-489e-a30f-085fd0e647dc" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="groupController.php" url="groupController.php">
 </file>
-<file id="cb0b0e8a-2302-4522-97a0-4ada4c664e74" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="userController.php" url="userController.php">
+<file id="ce409663-be1e-45d8-829a-93fa833074ab" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="userController.php" url="userController.php">
 </file>
 <file id="d708c82d-f67d-4cb7-be6a-ef89080bf034" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="User.php" url="User.php">
-</file>
-<file id="e6a67c0a-99af-46e8-ba25-da679f7b9855" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="eventController.php" url="eventController.php">
 </file>
 <preference-set idref="591fba3a-869b-4d99-8c69-fa76874430a2" id="project" preftype="project">
   <long id="prefs_version">1</long>
