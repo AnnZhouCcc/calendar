@@ -1,0 +1,20 @@
+Development document:
+	This document is used for communication between two group members.
+	This document contains information for setting up the database.
+
+How to set up the data base for Module 3:
+	Login with root
+	Create a new user with name M5 and password 123456:
+		create user 'M5'@'localhost' identified by '123456';
+
+	Create a new database: NewsWebsite:
+		create database Calendar;
+
+	Grand Privilege for user:
+		grant all on Calendar.* to M5@'localhost';
+
+	Logout and re-login as M5
+
+How to create tables:
+	Open, Calendar_create.sql Copy , paste into sql terminal
+
