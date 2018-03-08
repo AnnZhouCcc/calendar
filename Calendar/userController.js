@@ -6,7 +6,7 @@ function loginAjax(event){
 	var dataString = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password);
 	
 	var xmlHttp = new XMLHttpRequest(); // Initialize our XMLHttpRequest instance
-	xmlHttp.open("POST", "login_ajax.php", true); // Starting a POST request (NEVER send passwords as GET variables!!!)
+	xmlHttp.open("POST", "userController.php", true); // Starting a POST request (NEVER send passwords as GET variables!!!)
 	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // It's easy to forget this line for POST requests
 	xmlHttp.addEventListener("load", function(event){
 		var jsonData = JSON.parse(event.target.responseText); // parse the JSON into a JavaScript object

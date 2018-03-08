@@ -9,6 +9,8 @@
 </file>
 <file id="6025fea2-7add-4298-b679-593cb0544240" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="global.php" url="global.php">
 </file>
+<file id="60d5bf03-6798-d849-8ecf-4543620aedb4" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="calendarController.js" url="calendarController.js">
+</file>
 <file id="650d5837-5dc8-4b82-b495-61cd7f67da54" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="eventController.js" url="eventController.js">
 </file>
 <file id="78d3cccd-4402-4a1b-a525-2d533a7ea70d" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="Event.php" url="Event.php">
@@ -19,9 +21,13 @@
 </file>
 <file id="96118bdb-b262-489e-a30f-085fd0e647dc" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="groupController.php" url="groupController.php">
 </file>
+<file id="cd330de3-29b2-b346-9412-03bc946b4a6c" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="calendarController.php" url="calendarController.php">
+</file>
 <file id="ce409663-be1e-45d8-829a-93fa833074ab" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="userController.php" url="userController.php">
 </file>
 <file id="d708c82d-f67d-4cb7-be6a-ef89080bf034" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="User.php" url="User.php">
+</file>
+<file id="e71bc486-6ac7-ea49-8e49-be6f3b4cc34c" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="Calendar.php" url="Calendar.php">
 </file>
 <preference-set idref="591fba3a-869b-4d99-8c69-fa76874430a2" id="project" preftype="project">
   <long id="prefs_version">1</long>

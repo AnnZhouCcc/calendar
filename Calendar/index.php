@@ -13,7 +13,10 @@
 	// top navigation bar: include login, regester button or logout buttion
 	// no implemented yet
 	?>
-	
+		<input type="text" id="username" placeholder="Username" />
+		<input type="password" id="password" placeholder="Password" />
+		<button id="login_btn">Log In</button>
+		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
 	
