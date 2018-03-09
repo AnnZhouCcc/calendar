@@ -21,7 +21,7 @@
 		<input type="text" id="username" placeholder="Username" />
 		<input type="password" id="password" placeholder="Password" />
 		<input type="hidden" id="act" value="login" />
-		<button id="login_btn">Log In</button><br>
+		<button id="login_btn">Log In</button><br> 
 		
 		<input type="text" id="regusername" placeholder="Username" />
 		<input type="password" id="regpassword" placeholder="Password" />
