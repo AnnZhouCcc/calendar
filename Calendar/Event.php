@@ -25,6 +25,7 @@
 		static function fetchDay($date){
 			include "global.php";
 			$resultEvents=array();
+			//echo $date;
 			$stmt = $mysqli->prepare("SELECT id,title,time,category FROM Events WHERE time>=? AND time<DATE_ADD(?,INTERVAL 1 DAY)");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $mysqli->error);

@@ -24,7 +24,7 @@
 			  <th>Sat</th>
 			</tr>
 			<?php
-			for($week =0;$week<6;$week++){
+			for($week =0;$week<5;$week++){
 				echo "<tr name=\"week".$week."\">";
 					for($day = 0;$day < 7;$day++){
 						echo "<td name=\"week".$week."day".$day."\">";

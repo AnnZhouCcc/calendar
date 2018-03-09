@@ -28,7 +28,10 @@ function updateCalendar(){
 			// convert javascript date to mysql date
 			// reference:
 			// https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-			updateADay(days[d].toISOString().slice(0, 19).replace('T', ' '),w,d);
+			// convert time: https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+			var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+			var localISOTime = (new Date(days[d] - tzoffset)).toISOString().slice(0, -1);
+			updateADay(localISOTime.slice(0, 19).replace('T', ' '),w,d);
 			console.log(days[d].toISOString(),w,d);
 		}
 	}
@@ -48,13 +51,13 @@ function updateADay(sqlDate,week,day){
 		if(eventsData.length>0){
 			var dayNode = document.getElementsByName("week"+week+"day"+day)[0];
 			console.log(dayNode+"week"+week+"day"+day);
-			dayNode.innerHTML="";
+			// dayNode.innerHTML=""; // not working
 			var ul = document.createElement("ul");
 			for(var aEvent in eventsData){
 				var li = document.createElement("li");
 				console.log(eventsData[aEvent].title);
-				li.innerHtml = ""+eventsData[aEvent].title;
-				console.log(li.innerHtml);
+				//li.innerHtml = ""+eventsData[aEvent].title; // do not use this. not working
+				li.appendChild(document.createTextNode(eventsData[aEvent].title));
 				ul.appendChild(li);
 			}
 			dayNode.appendChild(ul);
