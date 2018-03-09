@@ -3,7 +3,7 @@ Development document:
 	This document contains information for setting up the database.
 
 How to set up the data base for Module 3:
-	Login with root
+	Login with root(mysql -u root -p)
 	Create a new user with name M5 and password 123456:
 		create user 'M5'@'localhost' identified by '123456';
 
