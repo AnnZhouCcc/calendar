@@ -20,6 +20,7 @@
 	exit;
 	}
 	
+	//security check
 	if (!empty($_POST['token'])){
 		if(!hash_equals($_SESSION['token'], $_POST['token'])){
 			die("<h3>Request forgery detected</h3>");

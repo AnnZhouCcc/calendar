@@ -12,13 +12,14 @@
 		 */
 		Static function register($username,$email,$password){
 			require_once "global.php";
-	
-			if(!hash_equals($_SESSION['token'], $_POST['token'])){
-				die("<h3>Request forgery detected</h3>");
-			}
+			
+			?>
+				<script>
+					alert ("Here");
+				</script>
+			<?php
 					
-			$userReg=$_POST['regusername'];
-			if( !preg_match('/^[\w_\-]+$/', $userReg) ){
+			if( !preg_match('/^[\w_\-]+$/', $username) ){
 				?>
 				<script>
 					alert ("Username is invalid");
@@ -27,51 +28,21 @@
 				exit;
 			}
 			
-			require_once 'database.php';
-			$name = $userReg;
-			$pw = $_POST['regpassword'];
-			$pass = password_hash($pw, PASSWORD_DEFAULT);
-			$email = $_POST['regemail'];
+			$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 			
-			$stmt = $mysqli->prepare("insert into users (name, password, email) values (?, ?, ?)");
+			$stmt = $mysqli->prepare("insert into Users (username, email, password) values (?, ?, ?)");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $mysqli->error);
 				exit;
 			}
 			
-			$stmt->bind_param('sss', $name, $pass, $email);
+			$stmt->bind_param('sss', $username, $hashedpassword, $email);
 			
 			$stmt->execute();
 			
 			$stmt->close();
 			
-			//check whether added
-			$isFound = False;
-			$stmt = $mysqli->prepare("SELECT name FROM users WHERE EXISTS(SELECT name FROM users WHERE email=?)");
-			if(!$stmt){
-					printf("Query Prep Failed: %s\n", $mysqli->error);
-					exit;
-			}
-			
-			$stmt->bind_param('i', $email);
-				
-			$stmt->execute();
-			
-			$stmt->bind_result($check_existence);
-			
-			while($stmt->fetch()){
-				if ($check_existence == $name){
-					$isMatched = True;
-				}
-			}
-				
-			if($isMatched == True){
-				header('Location: http://ec2-52-14-68-17.us-east-2.compute.amazonaws.com/~annzhou/goodregister.php');
-				exit;
-			} else{
-				header('Location: http://ec2-52-14-68-17.us-east-2.compute.amazonaws.com/~annzhou/badlogin.php');
-				exit;
-			}
+			header('Location: index.php');
 		}
 		
 		/**
@@ -79,10 +50,16 @@
 		 * If the doesn't match, return false
 		 */
 		Static function login($username,$submitPassword){
-			require_once "global.php";
+			include "global.php";
+			
+			//$mysqli = new mysqli('localhost', 'M5', '123456', 'Calendar');
+			//if($mysqli->connect_errno) {
+			//	printf("Connection Failed: %s\n", $mysqli->connect_error);
+			//	exit;
+			//}
 			
 			// fetch password from database
-			$stmt = $mysqli->prepare("SELECT password FROM User WHERE username=?");
+			$stmt = $mysqli->prepare("SELECT password FROM Users WHERE username=?");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $mysqli->error);
 				exit;
@@ -98,27 +75,26 @@
 			
 			//fetch from database, if user does not exist, alert error.
 			if(!$stmt->fetch()){
-				?>
-				<script>
-					alert ("User does not exist, try again");
-				</script>
-				<?php
+				echo ("User does not exist, try again");
+				//$_SESSION['debug']="fetch";
 				return false;
 			}
 			
 			// check password,
 			// alert error message if password is wrong and return false,
 			// return true if password is correct
-			if(password_verify($realPassword, $submitPassword)){
+			$check = password_verify($realPassword, $submitPassword);
+			if($check){
 				// Login succeeded!
 				return true;
 			} else{
 				// Login failed
-				?>
-				<script>
-					alert("Wrong password, try again");
-				</script>
-				<?php
+					echo ("Wrong password, try again");
+					echo("msg1 ".password_verify($realPassword, $submitPassword));
+					echo("msg2 ".$check);
+					echo ("realpw: ".$realPassword);
+					echo ("submitpw: ".$submitPassword);
+				//$_SESSION['debug']="password";
 				return false;
 			}
 			
