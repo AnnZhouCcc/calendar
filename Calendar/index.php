@@ -22,13 +22,13 @@
 		<input type="password" id="password" placeholder="Password" />
 		<input type="hidden" id="act" value="login" />
 		<button id="login_btn">Log In</button><br>
-		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 		
 		<input type="text" id="regusername" placeholder="Username" />
 		<input type="password" id="regpassword" placeholder="Password" />
 		<input type="text" id="regemail" placeholder="Email" />
 		<input type="hidden" id="act" value="register" />
 		<button id="reg_btn">Register</button><br>
+		
 		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
