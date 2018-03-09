@@ -9,7 +9,9 @@
 
 <?php
 	require_once "global.php";
-	
+	sessionCheckStart();
+	$_SESSION["username"] = "renhao";
+	$_SESSION["calendarUser"] = "renhao";
 	// This is the home page for the calendar website
 	// Users can and only can see this page but not others.
 	
