@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="591fba3a-869b-4d99-8c69-fa76874430a2" kpf_version="5" name="Calendar.komodoproject">
+<file id="0c88af57-f8c3-4799-b7bb-ab4c3885f8c4" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="global.js" url="global.js">
+</file>
 <file id="0d7ca69f-a6a7-46bc-b467-12a07f8bcbc6" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="groupController.js" url="groupController.js">
 </file>
 <file id="2c24cfc6-6eae-4399-81f7-d8d59770e6f0" idref="591fba3a-869b-4d99-8c69-fa76874430a2" name="Group.php" url="Group.php">

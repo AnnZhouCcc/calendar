@@ -2,11 +2,14 @@
 <html>
 <head>
 	<title>Home</title>
+	<script src="global.js" type="text/javascript"></script>
 </head>
 
 <body>
 
 <?php
+	require_once "global.php";
+	
 	// This is the home page for the calendar website
 	// Users can and only can see this page but not others.
 	
@@ -15,7 +18,7 @@
 	?>
 		<input type="text" id="username" placeholder="Username" />
 		<input type="password" id="password" placeholder="Password" />
-		<button id="login_btn">Log In</button>
+		<button id="login_btn">Log In</button><br>
 		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
@@ -32,10 +35,15 @@
 	
 	// calendar:
 	// show the calendar
-	// not implemented yet 
+	// not implemented yet
+	Calendar::showCalendar();
 	?>
-	
+		<button id="last_month_btn">last month</button>
+		<p>this month<p>
+		<button id="next_month_btn">next month</button>
+		<script type="text/javascript" src="calendarController.js"></script>
 	<?php
+	
 ?>
 
 </body>

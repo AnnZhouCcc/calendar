@@ -11,6 +11,33 @@
 		}
 		
 		
+		static function showCalendar(){
+			echo "<table name = \"calendar\">";
+			?>
+			<tr>
+			  <th>Sun</th>
+			  <th>Mon</th> 
+			  <th>Tue</th>
+			  <th>Wed</th>
+			  <th>Thu</th>
+			  <th>Fri</th>
+			  <th>Sat</th>
+			</tr>
+			<?php
+			for($week =0;$week<6;$week++){
+				echo "<tr name=\"week".$week."\">";
+					for($day = 0;$day < 7;$day++){
+						echo "<td name=\"week".$week."day".$day."\">";
+							echo $week.$day;
+						echo "</td>";
+					}
+				echo "</tr>";
+			}
+			echo "</table>";
+			?>
+			<?php
+		}
+		
 
 		
 		
