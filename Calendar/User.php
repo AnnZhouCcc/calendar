@@ -10,8 +10,68 @@
 		/**
 		 * This function will regester a user.
 		 */
-		Static function regester($username,$email,$password){
-			echo "No implementation";
+		Static function register($username,$email,$password){
+			require_once "global.php";
+	
+			if(!hash_equals($_SESSION['token'], $_POST['token'])){
+				die("<h3>Request forgery detected</h3>");
+			}
+					
+			$userReg=$_POST['regusername'];
+			if( !preg_match('/^[\w_\-]+$/', $userReg) ){
+				?>
+				<script>
+					alert ("Username is invalid");
+				</script>
+				<?php
+				exit;
+			}
+			
+			require_once 'database.php';
+			$name = $userReg;
+			$pw = $_POST['regpassword'];
+			$pass = password_hash($pw, PASSWORD_DEFAULT);
+			$email = $_POST['regemail'];
+			
+			$stmt = $mysqli->prepare("insert into users (name, password, email) values (?, ?, ?)");
+			if(!$stmt){
+				printf("Query Prep Failed: %s\n", $mysqli->error);
+				exit;
+			}
+			
+			$stmt->bind_param('sss', $name, $pass, $email);
+			
+			$stmt->execute();
+			
+			$stmt->close();
+			
+			//check whether added
+			$isFound = False;
+			$stmt = $mysqli->prepare("SELECT name FROM users WHERE EXISTS(SELECT name FROM users WHERE email=?)");
+			if(!$stmt){
+					printf("Query Prep Failed: %s\n", $mysqli->error);
+					exit;
+			}
+			
+			$stmt->bind_param('i', $email);
+				
+			$stmt->execute();
+			
+			$stmt->bind_result($check_existence);
+			
+			while($stmt->fetch()){
+				if ($check_existence == $name){
+					$isMatched = True;
+				}
+			}
+				
+			if($isMatched == True){
+				header('Location: http://ec2-52-14-68-17.us-east-2.compute.amazonaws.com/~annzhou/goodregister.php');
+				exit;
+			} else{
+				header('Location: http://ec2-52-14-68-17.us-east-2.compute.amazonaws.com/~annzhou/badlogin.php');
+				exit;
+			}
 		}
 		
 		/**
@@ -69,7 +129,15 @@
 		 *	This function will destroy user's session
 		 */
 		function logout(){
-			echo "No implementation";
+			require_once "global.php";
+			
+			if(isset($_SESSION['username'])){
+					unset($_SESSION['username']);
+					session_unset;
+					session_destroy;
+			}
+			
+			header('Location: index.php');
 		}
 		
 		/**
