@@ -11,38 +11,80 @@
 		 * This function will regester a user.
 		 */
 		Static function register($username,$email,$password){
-			require_once "global.php";
-			
-			?>
-				<script>
-					alert ("Here");
-				</script>
-			<?php
+			include "global.php";
 					
 			if( !preg_match('/^[\w_\-]+$/', $username) ){
-				?>
-				<script>
-					alert ("Username is invalid");
-				</script>
-				<?php
-				exit;
+				//echo "Username is invalid";
+				return false;
 			}
+			
+			$isRepeated = False;
+			$stmt0 = $mysqli->prepare("SELECT username FROM Users WHERE EXISTS(SELECT username FROM Users WHERE username=?)");
+			if(!$stmt0){
+				return false;
+			}
+			
+			$stmt0->bind_param('s', $username);
+				
+			$stmt0->execute();
+			
+			$stmt0->bind_result($check_repetition);
+			
+			while($stmt0->fetch()){
+				//echo $check_existence;
+				if ($check_repetition == $username){
+					$isRepeated = True;
+				}
+			}
+				
+			if($isRepeated == True){
+				return false;
+			} 
 			
 			$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 			
 			$stmt = $mysqli->prepare("insert into Users (username, email, password) values (?, ?, ?)");
 			if(!$stmt){
-				printf("Query Prep Failed: %s\n", $mysqli->error);
-				exit;
+				//printf("Query Prep Failed: %s\n", $mysqli->error);
+				//exit;
+				return false;
 			}
 			
-			$stmt->bind_param('sss', $username, $hashedpassword, $email);
+			$stmt->bind_param('sss', $username, $email, $hashedpassword);
 			
 			$stmt->execute();
 			
 			$stmt->close();
 			
-			header('Location: index.php');
+			//check whether added
+			$isFound = False;
+			$stmt1 = $mysqli->prepare("SELECT username FROM Users WHERE EXISTS(SELECT username FROM Users WHERE username=?)");
+			if(!$stmt1){
+					//printf("Query Prep Failed: %s\n", $mysqli->error);
+					//exit;
+					return false;
+			}
+			
+			$stmt1->bind_param('s', $username);
+				
+			$stmt1->execute();
+			
+			$stmt1->bind_result($check_existence);
+			//echo $check_existence;
+			//echo $username;
+			
+			while($stmt1->fetch()){
+				//echo $check_existence;
+				if ($check_existence == $username){
+					$isFound = True;
+				}
+			}
+				
+			if($isFound == True){
+				return true;
+			} else{
+				return false;
+			}
 		}
 		
 		/**
@@ -61,8 +103,9 @@
 			// fetch password from database
 			$stmt = $mysqli->prepare("SELECT password FROM Users WHERE username=?");
 			if(!$stmt){
-				printf("Query Prep Failed: %s\n", $mysqli->error);
-				exit;
+				//printf("Query Prep Failed: %s\n", $mysqli->error);
+				//exit;
+				return false;
 			}
 			
 			//// Bind the parameter
@@ -75,7 +118,7 @@
 			
 			//fetch from database, if user does not exist, alert error.
 			if(!$stmt->fetch()){
-				echo ("User does not exist, try again");
+				//echo "User does not exist, try again";
 				//$_SESSION['debug']="fetch";
 				return false;
 			}
@@ -83,37 +126,43 @@
 			// check password,
 			// alert error message if password is wrong and return false,
 			// return true if password is correct
-			$check = password_verify($realPassword, $submitPassword);
+			$check = password_verify($submitPassword, $realPassword);
 			if($check){
 				// Login succeeded!
+				//echo(password_verify($realPassword, $submitPassword));
+				
+				$_SESSION['token'] = substr(md5(rand()), 0, 10);
 				return true;
 			} else{
 				// Login failed
-					echo ("Wrong password, try again");
-					echo("msg1 ".password_verify($realPassword, $submitPassword));
-					echo("msg2 ".$check);
-					echo ("realpw: ".$realPassword);
-					echo ("submitpw: ".$submitPassword);
+					//echo "Wrong password, try again";
+					//echo(password_verify($realPassword, $submitPassword));
+					////echo("msg2 ".$check);
+					//echo ("realpw: ".$realPassword);
+					//echo ("submitpw: ".$submitPassword);
 				//$_SESSION['debug']="password";
 				return false;
 			}
-			
-			$_SESSION['token'] = substr(md5(rand()), 0, 10);
 		}
 		
 		/**
 		 *	This function will destroy user's session
 		 */
-		function logout(){
-			require_once "global.php";
+		Static function logout(){
+			include "global.php";
 			
 			if(isset($_SESSION['username'])){
-					unset($_SESSION['username']);
-					session_unset;
-					session_destroy;
+				unset($_SESSION['username']);
+				session_unset;
+				session_destroy;
 			}
 			
-			header('Location: index.php');
+			//check whether session destroyed
+			if (isset($_SESSION['username'])) {
+				return false;
+			} else{
+				return true;
+			}
 		}
 		
 		/**

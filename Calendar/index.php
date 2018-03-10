@@ -9,9 +9,9 @@
 
 <?php
 	require_once "global.php";
-	sessionCheckStart();
-	$_SESSION["username"] = "renhao";
-	$_SESSION["calendarUser"] = "renhao";
+	//sessionCheckStart();
+	//$_SESSION["username"] = "renhao";
+	//$_SESSION["calendarUser"] = "renhao";
 	// This is the home page for the calendar website
 	// Users can and only can see this page but not others.
 	
@@ -20,14 +20,17 @@
 	?>
 		<input type="text" id="username" placeholder="Username" />
 		<input type="password" id="password" placeholder="Password" />
-		<input type="hidden" id="act" value="login" />
+		<!--<input type="hidden" id="login" value="login" />-->
 		<button id="login_btn">Log In</button><br> 
 		
 		<input type="text" id="regusername" placeholder="Username" />
 		<input type="password" id="regpassword" placeholder="Password" />
 		<input type="text" id="regemail" placeholder="Email" />
-		<input type="hidden" id="act" value="register" />
+		<!--<input type="hidden" id="register" value="register" />-->
 		<button id="reg_btn">Register</button><br>
+		
+		<!--<input type="hidden" id="register" value="register" />-->
+		<button id="logout_btn">Log Out</button><br>
 		
 		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
