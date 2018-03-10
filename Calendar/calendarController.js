@@ -27,15 +27,16 @@ for(var [key,value] of categoriesMap.entries()){
 		console.log(key);
 		var checkBox = document.getElementsByName(key2)[0];
 		console.log(""+value2);
-		console.log(document.getElementsByClassName(""+value2));
-
-		element = document.getElementsByClassName(""+value2);
-		for(var index in document.getElementsByClassName(""+value2)){
-			console.log(element[index]);
+		var events = document.getElementsByClassName(value2);
+		console.log(events);
+		var index ;
+		for(index = 0;index<events["length"];index++){
+			console.log(index);
+			console.log(events[index]);
 			if (checkBox.checked == true){
-					element[index].style.display = "block";
+					events[index].style.display = "block";
 				} else {
-				   element[index].style.display = "none";
+				   events[index].style.display = "none";
 				}
 			}
 	},false);
