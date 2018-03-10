@@ -1,3 +1,19 @@
+/*
+ * a map for categories
+ * Key: name of chick box, value: class of category
+ */
+categoriesMap = new Map();
+categoriesMap.set("workCheckbox","work");
+categoriesMap.set("studyCheckbox","study");
+categoriesMap.set("entertainmentCheckbox","entertainment");
+categoriesMap.set("othersCheckbox","others");
+
+
+
+
+
+
+
 /* * * * * * * * * * * * * * * * * * * *\
  *               Module 4              *
  *      Calendar Helper Functions      *

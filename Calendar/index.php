@@ -9,7 +9,6 @@
 
 <?php
 	require_once "global.php";
-	//sessionCheckStart();
 	//$_SESSION["username"] = "renhao";
 	//$_SESSION["calendarUser"] = "renhao";
 	// This is the home page for the calendar website
@@ -39,7 +38,6 @@
 		<input type="text" id="addgroupmember" placeholder="Group Member" />
 		<button id="addmember_btn">Add Member</button><br>
 		
-		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
 	
@@ -49,7 +47,11 @@
 	// other functions
 	// not implemented yet
 	?>
-	
+		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox"> work<br>
+		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox"> study<br>
+		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox"> entertainment<br>
+		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox"> others<br>
+		
 	<?php
 	
 	
@@ -58,7 +60,7 @@
 	// not implemented yet
 	Calendar::showCalendar();
 	?>
-		<button id="last_month_btn">last month</button>
+		<button id="previous_month_btn">previous month</button>
 		<p>this month<p>
 		<button id="next_month_btn">next month</button>
 		<script type="text/javascript" src="calendarController.js"></script>

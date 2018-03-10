@@ -35,6 +35,14 @@
 			}
 	}
 	}
+	
+	if(!function_exists("consoleLog")){
+		function consolelog($message){
+			?>
+			<script>conslole.log(<?php $message?>)</script>
+			<?php
+		}
+	}
 
 	//<script src="global.js" type="text/javascript"></script>
 ?>

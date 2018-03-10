@@ -9,6 +9,7 @@
 			$newGroup = new Group();
 			$newGroup->id = $id;
 			$newGroup->name= $name;
+			return $newGroup;
 		}
 		
 		static function newGroup($usernname, $groupname){
@@ -94,7 +95,7 @@
 			include "global.php";
 			sessionCheckStart();
 			$user = $_SESSION["calendarUser"];
-			$resultGroups=array();
+			$user = "test";
 			$stmt = $mysqli->prepare("SELECT Groups_id FROM Group_users WHERE Users_username = ?");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -105,6 +106,7 @@
 			$stmt->bind_result($id);
 			$stmt->execute();
 			while($stmt->fetch()){
+				//echo $id;
 				$resultGroups[] = Group::fetchGroupbyID($id);
 			}
 			$stmt->close();
@@ -124,8 +126,8 @@
 			$stmt->execute();
 			$stmt->fetch();
 			$stmt->close();
+			//echo $name.$id;
 			return Group::newFull($id,$name);
-			//echo "I am here";
 		}
 	}
 ?>
