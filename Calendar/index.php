@@ -32,6 +32,8 @@
 		<!--<input type="hidden" id="register" value="register" />-->
 		<button id="logout_btn">Log Out</button><br>
 		
+		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
+		
 		<input type="text" id="newgroupname" placeholder="Group Name" />
 		<button id="newgroup_btn">Create Group</button><br>
 		
@@ -39,7 +41,7 @@
 		<input type="text" id="addgroupmember" placeholder="Group Member" />
 		<button id="addmember_btn">Add Member</button><br>
 		
-		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
+		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
 	
