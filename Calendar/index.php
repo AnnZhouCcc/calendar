@@ -32,6 +32,13 @@
 		<!--<input type="hidden" id="register" value="register" />-->
 		<button id="logout_btn">Log Out</button><br>
 		
+		<input type="text" id="newgroupname" placeholder="Group Name" />
+		<button id="newgroup_btn">Create Group</button><br>
+		
+		<input type="text" id="addgroupname" placeholder="Group Name" />
+		<input type="text" id="addgroupmember" placeholder="Group Member" />
+		<button id="addmember_btn">Add Member</button><br>
+		
 		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
 	<?php
 	
