@@ -17,4 +17,18 @@ How to set up the data base for Module 3:
 
 How to create tables:
 	Open, Calendar_create.sql Copy , paste into sql terminal
+	
+Changes to tables:
+	1. Title Events -> title
+	ALTER TABLE Events CHANGE Title title varchar(50);
+	
+	2. type of time Events -> datetime (1000-01-01 00:00:00 ≤ d ≤ 9999-12-31 23:59:59)
+	ALTER TABLE Events
+	MODIFY COLUMN time datetime;
+	
+	3. group_id Events -> nullable
+	ALTER TABLE Events MODIFY Groups_id int null;
+	
+	4. name Groups -> unique key
+	alter table Groups add unique key Groups_unique_name (name);
 
