@@ -120,36 +120,3 @@ function updateADay(sqlDate,week,day){
 	}, false); // Bind the callback to the load event
 	xmlHttp.send(dataString); // Send the data
 }
-
-function addeventAjax(event){
-	var username = document.getElementById("addeventuser").value;
-	var title = document.getElementById("title").value;
-	var time = document.getElementById("time").value;
-	var cat = document.getElementsByClassName("addeventcat").value;
-	var type = "addevent";
-	//alert(act);
-	
-	var dataString = "username=" + encodeURIComponent(username) + "&title=" + encodeURIComponent(title) + "&time=" + encodeURIComponent(time) + "&cat=" + encodeURIComponent(cat) + "&type=" + encodeURIComponent(type);
-	if (document.getElementById("gpname").value != null) {
-		var groupname = document.getElementById("gpname").value;
-		dataString = dataString + "groupname=" + encodeURIComponent(groupname);
-	}
-	//alert("here");
-	
-	var xmlHttp = new XMLHttpRequest(); 
-	xmlHttp.open("POST", "calendarController.php", true); 
-	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
-	xmlHttp.addEventListener("load", function(event){
-		//alert("response"+event.target.responseText);
-		var jsonData = JSON.parse(event.target.responseText); 
-		if(jsonData.success){  
-			alert("Event has been added!");
-		}else{
-			alert("Adding event failed.  "+jsonData.message);
-		}
-	}, false);
-	xmlHttp.send(dataString); 
-}
-
-//alert("register"+document.getElementById("reg_btn"));
-document.getElementById("addevent_btn").addEventListener("click", addeventAjax, false);

@@ -93,6 +93,7 @@
 		 */
 		Static function login($username,$submitPassword){
 			include "global.php";
+			sessionCheckStart();
 			
 			//$mysqli = new mysqli('localhost', 'M5', '123456', 'Calendar');
 			//if($mysqli->connect_errno) {
@@ -132,6 +133,7 @@
 				//echo(password_verify($realPassword, $submitPassword));
 				
 				$_SESSION['token'] = substr(md5(rand()), 0, 10);
+				$_SESSION['username'] = $username;
 				return true;
 			} else{
 				// Login failed
