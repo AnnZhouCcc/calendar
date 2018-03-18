@@ -1,0 +1,107 @@
+body{
+	background-color : #efefef;
+
+}
+/*The folling navigation bar styles are from*/
+/*https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_dividers*/
+ul.navBar{
+    list-style-type: none;
+	margin: 0;
+    padding: 0;
+    overflow: auto;
+	background-color: #222;
+	width: 100%;
+	height: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	position: fixed; /* Make it stick, even on scroll */
+}
+li.navLeft{
+	float: left;
+	border-right:none;
+	border-right:1px solid #bbb;
+}
+li.navRight{
+	float:right;
+	border-right:1px solid #bbb;
+	border-left:1px solid #bbb;
+}
+li a.navElement{
+	font-size: 25px;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li a:hover:not(.navHome){
+	background-color: #010101;
+	}
+li a.navHome{
+	background-color: #4745ef;
+}
+div.topBar{
+	margin-top: 100px;
+}
+/*side bar*/
+div.sideBar{
+	float: left;
+	width: 20%;
+	height: 800px;
+	padding-top: 10px;
+	padding-left: 5px;
+	background-color: #dadada;
+}
+
+/*calendar*/
+div.calendar{
+	float: right;
+	width: 75%;
+	height: 800px;
+	
+
+}
+div.CalendarButtons{
+	text-align: center;
+	
+}
+table.calendar{
+	border: 1px solid gray;
+	width: 100%;
+	height: auto;
+	overflow: scroll;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+tr.calenar{
+	border: 1px solid gray;
+	width: 50px;
+	overflow: scroll;
+}
+tr.calendar:hover{
+		
+}
+td.calendar{
+	vertical-align: text-top;
+	padding-top: 0px;
+	border-top: 0px;
+	border: 1px solid gray;
+	width:50px;
+	overflow: scroll;
+	height: 50px;
+}
+td.calendar:hover{
+	background-color: #aaaaaa;
+
+}
+th.calendar{
+	border: 1px solid gray;
+	width: 10%;
+}
+
+ul.events{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}

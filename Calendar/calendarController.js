@@ -107,6 +107,7 @@ function updateADay(sqlDate,week,day){
 			
 			
 			var ul = document.createElement("ul");
+			ul.setAttribute('calss','events');
 			for(var aEvent in eventsData){
 				var li = document.createElement("li");
 				console.log(eventsData[aEvent].title);

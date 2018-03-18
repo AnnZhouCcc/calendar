@@ -2,13 +2,37 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="global.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-
+	<?php
+		require_once "global.php";
+		//sessionCheckStart();
+	?>
+	<!--Top navigation bar-->
+	<ul class="navBar">
+		<?php
+			if(isset($_SESSION['username'])){
+				?>
+				<li class="navRight"><a class="navElement" id="logout_btn">Logout   <i class="material-icons">directions_run</i></a></li>
+				<?php
+			}else{
+				?>
+				<li class="navRight"><a class="navElement" href="userLoginPart1.php">Login   <i class="material-icons">person</i></a></li>
+				<li class="navRight"><a class="navElement" href="userRegistrationPart1.php">Register   <i class="material-icons">person_add</i></a></li>
+				<?php
+			}
+		?>
+	</ul>
 <?php
-	require_once "global.php";
+
+	
+	
 	//$_SESSION["username"] = "renhao";
 	//$_SESSION["calendarUser"] = "renhao";
 	// This is the home page for the calendar website
@@ -17,6 +41,7 @@
 	// top navigation bar: include login, regester button or logout buttion
 	// no implemented yet
 	?>
+	<div class="topBar">
 		<input type="text" id="username" placeholder="Username" />
 		<input type="password" id="password" placeholder="Password" />
 		<!--<input type="hidden" id="login" value="login" />-->
@@ -39,11 +64,8 @@
 		<input type="text" id="addgroupname" placeholder="Group Name" />
 		<input type="text" id="addgroupmember" placeholder="Group Member" />
 		<button id="addmember_btn">Add Member</button><br>
-		
-<<<<<<< HEAD
+	</div
 		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
-=======
->>>>>>> 312a273eaaf8e2d7392834cdc3fc78b0532b18c4
 	<?php
 	
 	
@@ -53,24 +75,31 @@
 	// other functions
 	// not implemented yet
 	?>
+	<div class="sideBar">
 		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox"> work<br>
 		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox"> study<br>
 		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox"> entertainment<br>
 		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox"> others<br>
-		
+	</div>
 	<?php
 	
 	
 	// calendar:
 	// show the calendar
-	// not implemented yet
-	Calendar::showCalendar();
 	?>
+	<div class="calendar">
+		<div class = "CalendarButtons">
 		<button id="previous_month_btn">previous month</button>
-		<p>this month<p>
+		<label>this month</label>
 		<button id="next_month_btn">next month</button>
 		<script type="text/javascript" src="calendarController.js"></script>
+		</div>
 	<?php
+	Calendar::showCalendar();
+	?>
+	</div>
+	<?php
+
 	
 ?>
 
