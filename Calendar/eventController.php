@@ -11,12 +11,14 @@
             //echo "into switch case";
 			$username = $_POST['username'];
 			$title = $_POST['title'];
+			//echo $title;
 			$time = $_POST['time'];
 			$date = $_POST['date'];
 			//$date = "1000-01-01";
 			$cat = $_POST['cat'];
+			//echo $cat;
             
-            echo $date;
+            //echo $date;
 			//echo $username;
 			
 			if ($_POST['groupname'] == null) {

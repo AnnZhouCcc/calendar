@@ -1,6 +1,6 @@
 
 // For our purposes, we can keep the current month in a variable in the global scope
-var currentMonth = new Month(2017, 9); // October 2017
+//var currentMonth = new Month(2017, 9); // October 2017
 updateCalendar();
 // Change the month when the "next" button is pressed
 document.getElementById("next_month_btn").addEventListener("click", function(event){

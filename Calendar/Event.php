@@ -25,7 +25,7 @@
 		static function addeventindiv($username, $title, $date, $time, $cat) {
 			include "global.php";
 			//echo $username;
-			$datetime = $date." ".$time;
+			$datetime = $date." ".$time.":00";
 			$stmt = $mysqli->prepare("insert into Events (title, time, category, Users_username) values (?, ?, ?, ?)");
 			if(!$stmt){
 				return false;
@@ -42,7 +42,7 @@
 		
 		static function addeventgroup($username, $title, $date, $time, $cat, $groupname) {
 			include "global.php";
-			$datetime = $date." ".$time;
+			$datetime = $date." ".$time.":00";
 			
 			//the following chunk can potentially be summarized as a method under Group.php named fetchGroupIDByName
 			$stmt0 = $mysqli->prepare("SELECT id FROM Groups WHERE name=?");
