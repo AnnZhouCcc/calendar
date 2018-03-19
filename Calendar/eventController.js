@@ -1,10 +1,25 @@
 function addeventAjax(event){
 	//alert("here");
-	var username = document.getElementById("addeventuser").value;
-	var title = document.getElementById("title").value;
-	var time = document.getElementById("time").value;
-	var numweek = document.getElementById("numweek").value;
-	var numday = document.getElementById("numday").value;
+	//var numweek = document.getElementById("numweek"+id).value;
+	//console.log(numweek);
+	//var numday = document.getElementById("numday"+id).value;
+	//console.log(numday);
+	//var id=numweek*10+numday;
+	console.log(id);
+	
+	var username = document.getElementById("addeventuser"+id).value;
+	console.log(username);
+	var title = document.getElementById("title"+id).value;
+	console.log(title);
+	var time = document.getElementById("time"+id).value;
+	console.log(time);
+	
+	//With help from:
+	//https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
+	var numweek = Math.floor(id/10);
+	console.log(numweek);
+	var numday = id - numweek*10;
+	console.log(numday);
 	
 	//With help from:
 	//https://stackoverflow.com/questions/2280104/convert-javascript-to-date-object-to-mysql-date-format-yyyy-mm-dd?noredirect=1&lq=1
@@ -19,19 +34,21 @@ function addeventAjax(event){
 	//console.log(localISOTime);
 	//console.log(localISOTime.slice(0, 19).replace('T', ' '),weeks,days);
 	var date = (localISOTime.slice(0, 10));
+	console.log(date);
 			
     //With help from:
     //https://stackoverflow.com/questions/1423777/how-can-i-check-whether-a-radio-button-is-selected-with-javascript
 	var cat;
-    if (document.getElementById('cat_work').checked){
+    if (document.getElementById('cat_work'+id).checked){
         cat = "work";
-    } else if (document.getElementById('cat_study').checked){
+    } else if (document.getElementById('cat_study'+id).checked){
         cat = "study";
-    } else if (document.getElementById('cat_entertainment').checked){
+    } else if (document.getElementById('cat_entertainment'+id).checked){
         cat = "entertainment";
-    } else if (document.getElementById('cat_others').checked){
+    } else if (document.getElementById('cat_others'+id).checked){
         cat = "others";
     }
+	console.log(cat);
 	var type = "addevent";
     //alert("username"+username);
     //alert("title"+title);
@@ -40,8 +57,8 @@ function addeventAjax(event){
 	//alert("type"+type);
 	
 	var dataString = "username=" + encodeURIComponent(username) + "&title=" + encodeURIComponent(title) + "&time=" + encodeURIComponent(time) + "&cat=" + encodeURIComponent(cat) + "&type=" + encodeURIComponent(type) + "&date=" + encodeURIComponent(date);
-	if (document.getElementById("gpname").value != null) {
-		var groupname = document.getElementById("gpname").value;
+	if (document.getElementById("gpname"+id).value != null) {
+		var groupname = document.getElementById("gpname"+id).value;
 		dataString = dataString + "&groupname=" + encodeURIComponent(groupname);
 	}
 	//alert("groupname: "+groupname);

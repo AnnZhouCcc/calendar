@@ -11,6 +11,41 @@
 		#addevent04 { display:none }
 		#addevent05 { display:none }
 		#addevent06 { display:none }
+		#addevent10 { display:none }
+		#addevent11 { display:none }
+		#addevent12 { display:none }
+		#addevent13 { display:none }
+		#addevent14 { display:none }
+		#addevent15 { display:none }
+		#addevent16 { display:none }
+		#addevent20 { display:none }
+		#addevent21 { display:none }
+		#addevent22 { display:none }
+		#addevent23 { display:none }
+		#addevent24 { display:none }
+		#addevent25 { display:none }
+		#addevent26 { display:none }
+		#addevent30 { display:none }
+		#addevent31 { display:none }
+		#addevent32 { display:none }
+		#addevent33 { display:none }
+		#addevent34 { display:none }
+		#addevent35 { display:none }
+		#addevent36 { display:none }
+		#addevent40 { display:none }
+		#addevent41 { display:none }
+		#addevent42 { display:none }
+		#addevent43 { display:none }
+		#addevent44 { display:none }
+		#addevent45 { display:none }
+		#addevent46 { display:none }
+		#addevent50 { display:none }
+		#addevent51 { display:none }
+		#addevent52 { display:none }
+		#addevent53 { display:none }
+		#addevent54 { display:none }
+		#addevent55 { display:none }
+		#addevent56 { display:none }
 	</style>
 	
 	<script src="global.js" type="text/javascript"></script>
@@ -21,21 +56,6 @@
 	
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script><!-- jquery-UI  hosted on Google's Ajax CDN-->
 	<!-- Note: you can download the javascript file from the link provided on the google doc, or simply provide its URL in the src attribute (microsoft and google also host the jQuery library-->
-	<script type="text/javascript">
-		//With help from:
-		//https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
-		function showaddevent(clicked_id) {
-			$("#addevent"+clicked_id).dialog();
-		}
-
-		
-		//$(document).ready(function(){
-		//	$("p").click(function(){
-		//		$(this).hide();
-		//		showaddevent(12);
-		//	});
-		//});
-	</script>
 </head>
 
 <body>
@@ -105,16 +125,15 @@
 	<div id="<?php echo 'addevent'.$week.$day;?>" title="Add Event">
 		You are logged in as: <?php echo $_SESSION['username'];?>
 		ID of the form is: <?php echo 'addevent'.$week.$day;?>
-		<input type="text" id="title" placeholder="Title" />
-		<input type="time" id="time" placeholder="Time" />
-		<input type="radio" class="addeventcat" name="work" id="cat_work" value="work"> work<br>
-		<input type="radio" class="addeventcat" name="study" id="cat_study" value="study"> study<br>
-		<input type="radio" class="addeventcat" name="entertainment" id="cat_entertainment" value="entertainment"> entertainment<br>
-		<input type="radio" class="addeventcat" name="others" id="cat_others" value="others"> others<br>
-		<input type="text" id="gpname" placeholder="Group name (if applicable)" />
-		<input type="hidden" id="addeventuser" value="<?php echo $_SESSION['username'];?>" />
-		<input type="hidden" id="numweek" value="<?php echo $week;?>" />
-		<input type="hidden" id="numday" value="<?php echo $day;?>" />
+		<input type="text" id="<?php echo 'title'.$week.$day;?>" placeholder="Title" />
+		<input type="time" id="<?php echo 'time'.$week.$day;?>" placeholder="Time" />
+		<input type="radio" class="addeventcat" name="work" id="<?php echo 'cat_work'.$week.$day;?>" value="work"> work<br>
+		<input type="radio" class="addeventcat" name="study" id="<?php echo 'cat_study'.$week.$day;?>" value="study"> study<br>
+		<input type="radio" class="addeventcat" name="entertainment" id="<?php echo 'cat_entertainment'.$week.$day;?>" value="entertainment"> entertainment<br>
+		<input type="radio" class="addeventcat" name="others" id="<?php echo 'cat_others'.$week.$day;?>" value="others"> others<br>
+		<input type="text" id="<?php echo 'gpname'.$week.$day;?>" placeholder="Group name (if applicable)" />
+		<input type="hidden" id="<?php echo 'addeventuser'.$week.$day;?>" value="<?php echo $_SESSION['username'];?>" />
+
 		<button id="<?php echo 'addevent_btn'.$week.$day;?>">Submit</button><br>
 	</div>
 	
@@ -122,6 +141,25 @@
 		}
 	}
 	?>
+	
+	<!--<p>trial</p>-->
+	
+	<!--<table>-->
+	<!--	<tr>-->
+	<!--		<th> Sun</th>-->
+	<!--		<th> Mon</th>-->
+	<!--	</tr>-->
+	<!--	<tr>-->
+	<!--		<td name=week10day1> <p id=01> 01 </p></td>-->
+	<!--		<td name=week10day2> <p id=02> 02 </p></td>-->
+	<!--	</tr>-->
+	<!--	<tr>-->
+	<!--		<td name=week10day3> <p id=03> 03 </p></td>-->
+	<!--		<td name=week10day4> <p id=04> 04 </p></td>-->
+	<!--	</tr>-->
+	<!--</table>-->
+	
+	<script type="text/javascript" src="calendarController.js"></script>
 	
 	<script type="text/javascript" src="eventController.js"></script>
 	

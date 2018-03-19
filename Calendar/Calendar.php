@@ -28,14 +28,17 @@
 				echo "<tr name=\"week".$week."\">";
 					for($day = 0;$day < 7;$day++){
 						echo "<td name=\"week".$week."day".$day."\">";
-							echo "<p>".$week.$day."</p>";
-							echo "<button id=".$week.$day." onclick='showaddevent(this.id)'>".$week.$day."</button>";
+							echo "<p id=".$week.$day.">".$week.$day."</p>";
+							//echo "<button id=".$week.$day." onclick='showaddevent(this.id)'>".$week.$day."</button>";
 						echo "</td>";
 					}
 				echo "</tr>";
 			}
 			echo "</table>";
 			?>
+			
+			<!--<script type="text/javascript" src="calendarController.js"></script>-->
+			
 			<?php
 		}
 	}

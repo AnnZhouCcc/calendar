@@ -99,7 +99,10 @@ function updateADay(sqlDate,week,day){
 		}
 		
 		//add day information:
-		var date = document.createElement("lable");
+		var date = document.createElement("p");
+		//With help from:
+		//https://stackoverflow.com/questions/9422974/createelement-with-id
+		date.setAttribute("id", week+day);
 		date.innerHTML=sqlDate.slice(8,10);
 		dayNode.appendChild(date);
 		if(eventsData.length>0){
@@ -118,5 +121,55 @@ function updateADay(sqlDate,week,day){
 			dayNode.appendChild(ul);
 		}
 	}, false); // Bind the callback to the load event
-	xmlHttp.send(dataString); // Send the data
+	xmlHttp.send(dataString); // Send the data	
 }
+
+//With help from:
+//https://stackoverflow.com/questions/14636536/how-to-check-if-a-variable-is-an-integer-in-javascript
+function isInt(value) {
+  return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value));
+}
+
+//With help from:
+//https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
+function showaddevent(clicked_id) {
+	console.log("here3");
+	$("#addevent"+clicked_id).dialog();
+}
+
+function showDialogAjax() {
+	console.log("here0");
+	//With help from:
+	//https://stackoverflow.com/questions/41373686/event-target-id-or-this-attrid-not-working-in-firefox
+	$(document).ready(function(){
+		$("td").click(function(){
+			console.log("here1");
+			$(document).click(function(event) {
+				console.log("here2");
+				var data = $(event.target).attr('id');
+				console.log(event.target);
+				console.log(data);
+				if (isInt(data)) {
+					id = data;
+				}
+				console.log(id);
+				showaddevent(id);
+			});
+		});
+	});
+}
+
+for (var i=0; i<6; i++){
+	for (var j=0; j<7; j++){
+		const i2 = i;
+		const j2 = j;
+		console.log(document.getElementsByName("week"+i2+"day"+j2)[0]);
+		document.getElementsByName("week"+i2+"day"+j2)[0].addEventListener("click", showDialogAjax, false);
+	}
+}
+
+//for (var a=1; a<5; a++){
+//	const a2 = a;
+//	console.log(document.getElementsByName("week10"+"day"+a2)[0]);
+//	document.getElementsByName("week10"+"day"+a2)[0].addEventListener("click", showDialogAjax, false);
+//}
