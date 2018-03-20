@@ -1,25 +1,26 @@
 function addeventAjax(event){
+	console.log("into addeventajax");
 	//alert("here");
 	//var numweek = document.getElementById("numweek"+id).value;
 	//console.log(numweek);
 	//var numday = document.getElementById("numday"+id).value;
 	//console.log(numday);
 	//var id=numweek*10+numday;
-	console.log("addevent id:"+id);
+	//console.log("addevent id:"+id);
 	
 	var username = document.getElementById("addeventuser"+id).value;
-	console.log(username);
+	//console.log(username);
 	var title = document.getElementById("title"+id).value;
-	console.log(title);
+	//console.log(title);
 	var time = document.getElementById("time"+id).value;
-	console.log(time);
+	//console.log(time);
 	
 	//With help from:
 	//https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
 	var numweek = Math.floor(id/10);
-	console.log(numweek);
+	//console.log(numweek);
 	var numday = id - numweek*10;
-	console.log(numday);
+	//console.log(numday);
 	
 	//With help from:
 	//https://stackoverflow.com/questions/2280104/convert-javascript-to-date-object-to-mysql-date-format-yyyy-mm-dd?noredirect=1&lq=1
@@ -34,7 +35,7 @@ function addeventAjax(event){
 	//console.log(localISOTime);
 	//console.log(localISOTime.slice(0, 19).replace('T', ' '),weeks,days);
 	var date = (localISOTime.slice(0, 10));
-	console.log(date);
+	//console.log(date);
 			
     //With help from:
     //https://stackoverflow.com/questions/1423777/how-can-i-check-whether-a-radio-button-is-selected-with-javascript
@@ -48,7 +49,7 @@ function addeventAjax(event){
     } else if (document.getElementById('cat_others'+id).checked){
         cat = "others";
     }
-	console.log(cat);
+	//console.log(cat);
 	var type = "addevent";
     //alert("username"+username);
     //alert("title"+title);

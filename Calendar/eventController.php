@@ -8,8 +8,9 @@
 	switch ($type){
 		case "addevent":
 	//if ($type == 'addevent'){
-            //echo "into switch case";
+            //echo "into addevent switch case";
 			$username = $_POST['username'];
+			//echo "username: ".$username;
 			$title = $_POST['title'];
 			//echo $title;
 			$time = $_POST['time'];

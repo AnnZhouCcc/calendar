@@ -173,10 +173,8 @@
 	?>
 	
 	<div id="<?php echo 'addevent'.$week.$day;?>" title="Add Event">
-		You are logged in as: <?php echo $_SESSION['username'];?>
-		ID of the form is: <?php echo 'addevent'.$week.$day;?>
-		<input type="text" id="<?php echo 'title'.$week.$day;?>" placeholder="Title" />
-		<input type="time" id="<?php echo 'time'.$week.$day;?>" placeholder="Time" />
+		<input type="text" id="<?php echo 'title'.$week.$day;?>" placeholder="Title" /><br>
+		<input type="time" id="<?php echo 'time'.$week.$day;?>" placeholder="Time" /><br>
 		<input type="radio" class="addeventcat" name="work" id="<?php echo 'cat_work'.$week.$day;?>" value="work"> work<br>
 		<input type="radio" class="addeventcat" name="study" id="<?php echo 'cat_study'.$week.$day;?>" value="study"> study<br>
 		<input type="radio" class="addeventcat" name="entertainment" id="<?php echo 'cat_entertainment'.$week.$day;?>" value="entertainment"> entertainment<br>
@@ -191,6 +189,8 @@
 		}
 	}
 	?>
+	
+	<script type="text/javascript" src="eventController.js"></script>
 	
 	<!--<p>trial</p>-->
 	
@@ -209,6 +209,7 @@
 	<!--	</tr>-->
 	<!--</table>-->
 	
+	You are logged in as: <?php echo $_SESSION['username'];?>
 	
 	<div class="calendar">
 		<div class = "CalendarButtons">
@@ -222,7 +223,6 @@
 	?>
 	<script type="text/javascript" src="calendarController.js"></script>
 	</div>
-	<script type="text/javascript" src="eventController.js"></script>
 
 
 

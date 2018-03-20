@@ -147,16 +147,16 @@ function showDialogAjax() {
 	//With help from:
 	//https://stackoverflow.com/questions/41373686/event-target-id-or-this-attrid-not-working-in-firefox
 	//$(document).ready(function(){
-		$("td").click(function(){
+		//$("td").click(function(){
 			console.log("here1");
-			console.log(event.target.nodeName);
-			console.log(event.target.nodeName == 'P');
+			//console.log(event.target.nodeName);
+			//console.log(event.target.nodeName == 'P');
 			$(document).click(function(event) {
 				console.log("here2");
 				if (event.target.nodeName == 'P'){
 					var data = $(event.target).attr('id');
-					console.log(event.target);
-					console.log(data);
+					//console.log(event.target);
+					//console.log(data);
 					if (isInt(data)) {
 						id = data;
 					}
@@ -174,7 +174,7 @@ function showDialogAjax() {
 					console.log(id);
 				}*/
 			});
-		});
+		//});
 	//});
 }
 
@@ -182,7 +182,7 @@ for (var i=0; i<6; i++){
 	for (var j=0; j<7; j++){
 		const i2 = i;
 		const j2 = j;
-		console.log(document.getElementsByName("week"+i2+"day"+j2)[0]);
+		//console.log(document.getElementsByName("week"+i2+"day"+j2)[0]);
 		document.getElementsByName("week"+i2+"day"+j2)[0].addEventListener("click", showDialogAjax, false);
 	}
 }
@@ -203,7 +203,7 @@ function showlogin() {
 
 function loginregisterAjax() {
 	console.log("here0");
-		$("a").click(function(){
+		//$("a").click(function(){
 			console.log("here1");
 			console.log($(event.target).attr('id'));
 			$(document).click(function(event) {
@@ -216,7 +216,7 @@ function loginregisterAjax() {
 					showregister();
 				}
 			});
-		});
+		//});
 	//});
 }
 		

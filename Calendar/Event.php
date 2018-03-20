@@ -24,12 +24,25 @@
 		
 		static function addeventindiv($username, $title, $date, $time, $cat) {
 			include "global.php";
-			//echo $username;
+			
+			echo "into Event php addeventindiv";
+			
+			if ($username == null){
+				echo "username is null";
+				return false;
+			}
+			
 			$datetime = $date." ".$time.":00";
 			$stmt = $mysqli->prepare("insert into Events (title, time, category, Users_username) values (?, ?, ?, ?)");
 			if(!$stmt){
+				prinf ("Query Prep Failed: %s\n", $mysqli->error);
 				return false;
 			}
+			
+			echo $title;
+			echo $datetime;
+			echo $cat;
+			echo $username;
 			
 			$stmt->bind_param('ssss', $title, $datetime, $cat, $username);
 			
@@ -42,6 +55,11 @@
 		
 		static function addeventgroup($username, $title, $date, $time, $cat, $groupname) {
 			include "global.php";
+			
+			if ($username == null){
+				return false;
+			}
+			
 			$datetime = $date." ".$time.":00";
 			
 			//the following chunk can potentially be summarized as a method under Group.php named fetchGroupIDByName
