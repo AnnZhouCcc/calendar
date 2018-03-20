@@ -127,7 +127,12 @@
 		
 		<input type="text" id="addgroupname" placeholder="Group Name" />
 		<input type="text" id="addgroupmember" placeholder="Group Member" />
-		<button id="addmember_btn">Add Member</button><br><br><br>
+		<button id="addmember_btn">Add Member</button><br>
+		
+		<input type="text" id="sharename" placeholder="Who to share with" />
+		<button id="share_btn">Share</button><br><br><br>
+		
+		<script type="text/javascript" src="shareController.js"></script>
 		
 		
 		<strong>Categories:</strong><br>
