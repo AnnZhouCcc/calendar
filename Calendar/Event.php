@@ -109,7 +109,12 @@
 			include "global.php";
 			$resultEvents=array();
 			sessionCheckStart();
-			$username = $_SESSION["calendarUser"];
+			if(isset($_SESSION["calendarUser"])){
+				$username = $_SESSION["calendarUser"];
+			}else{
+				return $resultEvents;
+			}
+			
 			//echo $date;
 			$stmt = $mysqli->prepare("SELECT id,title,time,category FROM Events WHERE Users_username=? AND time>=? AND time<DATE_ADD(?,INTERVAL 1 DAY)");
 			if(!$stmt){

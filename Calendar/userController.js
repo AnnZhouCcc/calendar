@@ -18,11 +18,19 @@ function loginAjax(event){
 		//alert(jsonData);
 		if(jsonData.success){  // in PHP, this was the "success" key in the associative array; in JavaScript, it's the .success property of jsonData
 			alert("You've been Logged In!");
+			$("#loginform").dialog("close");
+			updateCalendar();
+			$("#login_dialog").hide();
+			$("#register_dialog").hide();
+			$("#logout_btn").show();
+			$("#helloMessage").text("Hellllo"+username);
+			
 		}else{
 			alert("You were not logged in.  "+jsonData.message);
 		}
 	}, false); // Bind the callback to the load event
 	xmlHttp.send(dataString); // Send the data
+
 }
 
 //alert("login"+document.getElementById("login_btn"));
@@ -46,11 +54,13 @@ function regAjax(event){
 		var jsonData = JSON.parse(event.target.responseText); 
 		if(jsonData.success){  
 			alert("You've been registered!");
+			$("#registerform").dialog("close");
 		}else{
 			alert("You were not successfully registered.  "+jsonData.message);
 		}
 	}, false);
-	xmlHttp.send(dataString); 
+	xmlHttp.send(dataString);
+	
 }
 
 //alert("register"+document.getElementById("reg_btn"));
@@ -71,11 +81,17 @@ function logoutAjax(event){
 		var jsonData = JSON.parse(event.target.responseText); 
 		if(jsonData.success){  
 			alert("Logout completed");
+			updateCalendar();
 		}else{
 			alert("Logout unsuccessful.  "+jsonData.message);
 		}
 	}, false);
-	xmlHttp.send(dataString); 
+	xmlHttp.send(dataString);
+	console.log("tryting to refresh");
+	$("#login_dialog").show();
+	$("#register_dialog").show();
+	$("#logout_btn").hide();
+	$("#helloMessage").text("Hi guest, please login or regeister first");
 }
 
 //alert("register"+document.getElementById("reg_btn"));
