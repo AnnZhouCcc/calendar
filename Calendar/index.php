@@ -68,15 +68,15 @@
 	
 	<script>
 		$.noConflict();
-	$( function() {
-	  $( "#dialog" ).dialog({
-		autoOpen: false,
-	  });
-   
-	  $( "#opener" ).on( "click", function() {
-		$( "#dialog" ).dialog( "open" );
-	  });
-	} );
+	//$( function() {
+	//  $( "#dialog" ).dialog({
+	//	autoOpen: false,
+	//  });
+	//  
+	//  $( "#opener" ).on( "click", function() {
+	//	$( "#dialog" ).dialog( "open" );
+	//  });
+	//} );
 	</script>
 </head>
 
@@ -144,6 +144,11 @@
 		<button id="addmember_btn">Add Member</button><br>
 		
 		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
+		
+		<input type="text" id="sharename" placeholder="Who to share with" />
+		<button id="share_btn">Share</button><br>
+		
+		<script type="text/javascript" src="shareController.js"></script>
 	</div
 	<?php
 	

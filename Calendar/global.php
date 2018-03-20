@@ -9,6 +9,7 @@
 	require_once "Event.php";
 	require_once "Group.php";
 	require_once "User.php";
+	require_once "Share.php";
 
 	//this file contains global variables like databse and debug message
 	// print debug message

@@ -110,7 +110,7 @@ function updateADay(sqlDate,week,day){
 			
 			
 			var ul = document.createElement("ul");
-			ul.setAttribute('calss','events');
+			ul.setAttribute('class','events');
 			for(var aEvent in eventsData){
 				var li = document.createElement("li");
 				console.log(eventsData[aEvent].title);
@@ -169,10 +169,10 @@ function showDialogAjax() {
 					console.log(eventdata);
 					if (isInt(eventdata)) {
 						id = eventdata;
-					}
-					modifyevent(id);
-					console.log(id);
-				}*/
+					}*/
+					//modifyevent(id);
+					//console.log(id);
+				//}
 			});
 		//});
 	//});
