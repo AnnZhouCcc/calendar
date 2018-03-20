@@ -12,24 +12,24 @@
 		
 		
 		static function showCalendar(){
-			echo "<table name = \"calendar\">";
+			echo "<table name = \"calendar\" class = \"calendar\">";
 			?>
-			<tr>
-			  <th>Sun</th>
-			  <th>Mon</th> 
-			  <th>Tue</th>
-			  <th>Wed</th>
-			  <th>Thu</th>
-			  <th>Fri</th>
-			  <th>Sat</th>
+			<tr class="calendar">
+			  <th class="calendar">Sun</th>
+			  <th class="calendar">Mon</th> 
+			  <th class="calendar">Tue</th>
+			  <th class="calendar">Wed</th>
+			  <th class="calendar">Thu</th>
+			  <th class="calendar">Fri</th>
+			  <th class="calendar">Sat</th>
 			</tr>
 			<?php
 			for($week =0;$week<6;$week++){
-				echo "<tr name=\"week".$week."\">";
+				echo "<tr name=\"week".$week."\" class = \"calendar\" >";
 					for($day = 0;$day < 7;$day++){
-						echo "<td name=\"week".$week."day".$day."\">";
-							echo "<p id=".$week.$day.">".$week.$day."</p>";
 							//echo "<button id=".$week.$day." onclick='showaddevent(this.id)'>".$week.$day."</button>";
+						echo "<td name=\"week".$week."day".$day."\" class = \"calendar\" >";
+							echo "<p id=".$week.$day.">".$week.$day."</p>";
 						echo "</td>";
 					}
 				echo "</tr>";

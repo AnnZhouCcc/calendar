@@ -110,6 +110,7 @@ function updateADay(sqlDate,week,day){
 			
 			
 			var ul = document.createElement("ul");
+			ul.setAttribute('calss','events');
 			for(var aEvent in eventsData){
 				var li = document.createElement("li");
 				console.log(eventsData[aEvent].title);
@@ -141,7 +142,7 @@ function showDialogAjax() {
 	console.log("here0");
 	//With help from:
 	//https://stackoverflow.com/questions/41373686/event-target-id-or-this-attrid-not-working-in-firefox
-	$(document).ready(function(){
+	//$(document).ready(function(){
 		$("td").click(function(){
 			console.log("here1");
 			$(document).click(function(event) {
@@ -156,7 +157,7 @@ function showDialogAjax() {
 				showaddevent(id);
 			});
 		});
-	});
+	//});
 }
 
 for (var i=0; i<6; i++){

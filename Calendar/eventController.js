@@ -5,7 +5,7 @@ function addeventAjax(event){
 	//var numday = document.getElementById("numday"+id).value;
 	//console.log(numday);
 	//var id=numweek*10+numday;
-	console.log(id);
+	console.log("addevent id:"+id);
 	
 	var username = document.getElementById("addeventuser"+id).value;
 	console.log(username);
@@ -75,7 +75,8 @@ function addeventAjax(event){
 			alert("Adding event failed.  "+jsonData.message);
 		}
 	}, false);
-	xmlHttp.send(dataString); 
+	xmlHttp.send(dataString);
+	$("#addevent"+id).dialog("close");
 }
 
 for (var i=0; i<6; i++){
