@@ -152,11 +152,15 @@
 		 */
 		Static function logout(){
 			include "global.php";
+			sessionCheckStart();
+			//echo ("user php logout");
+			//echo $_SESSION['username'];
 			
 			if(isset($_SESSION['username'])){
 				unset($_SESSION['username']);
-				session_unset;
-				session_destroy;
+				//echo $_SESSION['username'];
+				session_unset();
+				session_destroy();
 			}
 			
 			//check whether session destroyed

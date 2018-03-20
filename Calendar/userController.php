@@ -47,6 +47,7 @@
 			exit;
 		}
 	} else if ($act == 'logout'){
+		//echo ("usercontroller php logout");
 		if( User::logout()){
 			echo json_encode(array(
 				"success" => true

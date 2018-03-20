@@ -57,6 +57,7 @@ function regAjax(event){
 document.getElementById("reg_btn").addEventListener("click", regAjax, false);
 
 function logoutAjax(event){
+	console.log("into logout");
 	var act = "logout";
 	
 	var dataString = "act=" + encodeURIComponent(act);
@@ -66,7 +67,7 @@ function logoutAjax(event){
 	xmlHttp.open("POST", "userController.php", true); 
 	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 	xmlHttp.addEventListener("load", function(event){
-		//alert(event.target.responseText);
+		console.log(event.target.responseText);
 		var jsonData = JSON.parse(event.target.responseText); 
 		if(jsonData.success){  
 			alert("Logout completed");

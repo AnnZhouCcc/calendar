@@ -46,6 +46,9 @@
 		#addevent54 { display:none }
 		#addevent55 { display:none }
 		#addevent56 { display:none }
+		
+		#registerform { display:none }
+		#loginform { display:none }
 	</style>
 	
 	<script src="global.js" type="text/javascript"></script>
@@ -79,8 +82,9 @@
 
 <body>
 	<?php
-		require_once "global.php";
-		//sessionCheckStart();
+		//require_once "global.php";
+		include "global.php";
+		sessionCheckStart();
 	?>
 	<!--Top navigation bar-->
 	<ul class="navBar">
@@ -88,17 +92,21 @@
 			if(isset($_SESSION['username'])){
 				?>
 				<li class="navRight"><a class="navElement" id="logout_btn">Logout   <i class="material-icons">directions_run</i></a></li>
+				
+				<script type="text/javascript" src="userController.js"></script>
 				<?php
 			}else{
 				?>
-				<li class="navRight"><a class="navElement" href="userLoginPart1.php">Login   <i class="material-icons">person</i></a></li>
-				<li class="navRight"><a class="navElement" href="userRegistrationPart1.php">Register   <i class="material-icons">person_add</i></a></li>
+				<li class="navRight"><a class="navElement" id="login_dialog">Login   <i class="material-icons">person</i></a></li>
+				<li class="navRight"><a class="navElement" id="register_dialog">Register   <i class="material-icons">person_add</i></a></li>
+				
+				<script type="text/javascript" src="calendarController.js"></script>
 				<?php
 			}
 		?>
 	</ul>
 <?php
-	sessionCheckStart();
+	//sessionCheckStart();
 
 
 	
@@ -111,23 +119,23 @@
 	// top navigation bar: include login, regester button or logout buttion
 	// no implemented yet
 	?>
-	<div class="topBar">
-		<input type="text" id="username" placeholder="Username" />
-		<input type="password" id="password" placeholder="Password" />
-		<!--<input type="hidden" id="login" value="login" />-->
-		<button id="login_btn">Log In</button><br> 
-		
+	
+	<div id="registerform" title="Register">
 		<input type="text" id="regusername" placeholder="Username" />
 		<input type="password" id="regpassword" placeholder="Password" />
 		<input type="text" id="regemail" placeholder="Email" />
-		<!--<input type="hidden" id="register" value="register" />-->
 		<button id="reg_btn">Register</button><br>
+	</div>
 		
-		<!--<input type="hidden" id="register" value="register" />-->
-		<button id="logout_btn">Log Out</button><br>
-		
-		<script type="text/javascript" src="userController.js"></script> <!-- load the JavaScript file -->
-		
+	<div id="loginform" title="Login">
+		<input type="text" id="username" placeholder="Username" />
+		<input type="password" id="password" placeholder="Password" />
+		<button id="login_btn">Log In</button><br> 
+	</div>
+	
+	<script type="text/javascript" src="userController.js"></script>
+	
+	<div class="topBar">
 		<input type="text" id="newgroupname" placeholder="Group Name" />
 		<button id="newgroup_btn">Create Group</button><br>
 		

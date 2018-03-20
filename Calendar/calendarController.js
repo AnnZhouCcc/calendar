@@ -138,9 +138,9 @@ function showaddevent(clicked_id) {
 	$("#addevent"+clicked_id).dialog();
 }
 
-function modifyevent(clicked_id){
-	console.log("here inside modifyevent");
-}
+//function modifyevent(clicked_id){
+//	console.log("here inside modifyevent");
+//}
 
 function showDialogAjax() {
 	console.log("here0");
@@ -162,7 +162,7 @@ function showDialogAjax() {
 					}
 					console.log(id);
 					showaddevent(id);
-				} else if (event.target.nodeName == 'LI') {
+				} /*else if (event.target.nodeName == 'LI') {
 					var eventdata = $(event.target.parentNode.previousSibling).attr('id');
 					console.log(event.target.parentNode);
 					console.log(event.target.parentNode.previousSibling);
@@ -172,7 +172,7 @@ function showDialogAjax() {
 					}
 					modifyevent(id);
 					console.log(id);
-				}
+				}*/
 			});
 		});
 	//});
@@ -192,3 +192,34 @@ for (var i=0; i<6; i++){
 //	console.log(document.getElementsByName("week10"+"day"+a2)[0]);
 //	document.getElementsByName("week10"+"day"+a2)[0].addEventListener("click", showDialogAjax, false);
 //}
+
+function showregister() {
+	$("#registerform").dialog();
+}
+
+function showlogin() {
+	$("#loginform").dialog();
+}
+
+function loginregisterAjax() {
+	console.log("here0");
+		$("a").click(function(){
+			console.log("here1");
+			console.log($(event.target).attr('id'));
+			$(document).click(function(event) {
+				console.log("here2");
+				if ($(event.target).attr('id') == "login_dialog"){
+					console.log("able to login");
+					showlogin();
+				} else if ($(event.target).attr('id') == "register_dialog") {
+					console.log("able to register");
+					showregister();
+				}
+			});
+		});
+	//});
+}
+		
+document.getElementById("login_dialog").addEventListener("click", loginregisterAjax, false);
+console.log("after listener");
+document.getElementById("register_dialog").addEventListener("click", loginregisterAjax, false);
