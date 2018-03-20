@@ -78,6 +78,7 @@ function addeventAjax(event){
 	}, false);
 	xmlHttp.send(dataString);
 	$("#addevent"+id).dialog("close");
+	updateCalendar();
 }
 
 for (var i=0; i<6; i++){

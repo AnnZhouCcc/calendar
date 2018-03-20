@@ -89,7 +89,7 @@ td.calendar{
 	border: 1px solid gray;
 	width:50px;
 	overflow: scroll;
-	height: 50px;
+	height: 120px;
 }
 td.calendar:hover{
 	background-color: #aaaaaa;
@@ -101,7 +101,23 @@ th.calendar{
 }
 
 ul.events{
-	list-style-type: none;
+	list-style-type:none;
 	margin: 0;
 	padding: 0;
+}
+li.work{
+	background-color: pink;
+	margin: 1px;
+}
+li.study{
+	background-color: #97ff6e;
+	margin: 1px;
+}
+li.entertainment{
+	background-color: #6ec1ff;
+	margin: 1px;
+}
+li.others{
+	background-color: #976eff;
+	margin: 1px;
 }

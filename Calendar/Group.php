@@ -162,8 +162,12 @@
 		static function getUserGroups(){
 			include "global.php";
 			sessionCheckStart();
-			$user = $_SESSION["calendarUser"];
-			$user = "test";
+			$resultGroups = array();
+			if(isset($_SESSION["calendarUser"])){
+				$user = $_SESSION["calendarUser"];
+			}else{
+				return $resultGroups;
+			}
 			$stmt = $mysqli->prepare("SELECT Groups_id FROM Group_users WHERE Users_username = ?");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $mysqli->error);

@@ -4,56 +4,20 @@
 	<title>Home</title>
 	
 	<style>
-		#addevent00 { display:none }
-		#addevent01 { display:none }
-		#addevent02 { display:none }
-		#addevent03 { display:none }
-		#addevent04 { display:none }
-		#addevent05 { display:none }
-		#addevent06 { display:none }
-		#addevent10 { display:none }
-		#addevent11 { display:none }
-		#addevent12 { display:none }
-		#addevent13 { display:none }
-		#addevent14 { display:none }
-		#addevent15 { display:none }
-		#addevent16 { display:none }
-		#addevent20 { display:none }
-		#addevent21 { display:none }
-		#addevent22 { display:none }
-		#addevent23 { display:none }
-		#addevent24 { display:none }
-		#addevent25 { display:none }
-		#addevent26 { display:none }
-		#addevent30 { display:none }
-		#addevent31 { display:none }
-		#addevent32 { display:none }
-		#addevent33 { display:none }
-		#addevent34 { display:none }
-		#addevent35 { display:none }
-		#addevent36 { display:none }
-		#addevent40 { display:none }
-		#addevent41 { display:none }
-		#addevent42 { display:none }
-		#addevent43 { display:none }
-		#addevent44 { display:none }
-		#addevent45 { display:none }
-		#addevent46 { display:none }
-		#addevent50 { display:none }
-		#addevent51 { display:none }
-		#addevent52 { display:none }
-		#addevent53 { display:none }
-		#addevent54 { display:none }
-		#addevent55 { display:none }
-		#addevent56 { display:none }
-		
+		<?php
+			for($week =0; $week<6;$week++){
+				for($day = 0;$day < 7;$day++){
+					echo "#addevent".$week.$day."{display:none}";
+				}
+			}
+		?>
 		#registerform { display:none }
 		#loginform { display:none }
 	</style>
 	
 	<script src="global.js" type="text/javascript"></script>
 	
-	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" /> <!-- We need the style sheet linked above or the dialogs/other parts of jquery-ui won't display correctly!-->
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" /> <!-- We need the style sheet linked above or the dialogs/other parts of jquery-ui won't display correctly!-->
 	
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script><!-- The main library.  Note: must be listed before the jquery-ui library -->
 	
@@ -87,20 +51,24 @@
 		sessionCheckStart();
 	?>
 	<!--Top navigation bar-->
-	<ul class="navBar">
+	<ul class="navBar" id= "navBar">
+		<li class="navRight"><a class="navElement" id="logout_btn">Logout   <i class="material-icons">directions_run</i></a></li>
+		<li class="navRight"><a class="navElement" id="login_dialog">Login   <i class="material-icons">person</i></a></li>
+		<li class="navRight"><a class="navElement" id="register_dialog">Register   <i class="material-icons">person_add</i></a></li>
 		<?php
 			if(isset($_SESSION['username'])){
 				?>
-				<li class="navRight"><a class="navElement" id="logout_btn">Logout   <i class="material-icons">directions_run</i></a></li>
-				
-				<script type="text/javascript" src="userController.js"></script>
+					<script>
+						$("#login_dialog").hide();
+						$("#register_dialog").hide();
+					</script>
 				<?php
 			}else{
 				?>
-				<li class="navRight"><a class="navElement" id="login_dialog">Login   <i class="material-icons">person</i></a></li>
-				<li class="navRight"><a class="navElement" id="register_dialog">Register   <i class="material-icons">person_add</i></a></li>
+					<script>
+						$("#logout_btn").hide();
+					</script>
 				
-				<script type="text/javascript" src="calendarController.js"></script>
 				<?php
 			}
 		?>
@@ -133,18 +101,11 @@
 		<button id="login_btn">Log In</button><br> 
 	</div>
 	
-	<script type="text/javascript" src="userController.js"></script>
+	
 	
 	<div class="topBar">
-		<input type="text" id="newgroupname" placeholder="Group Name" />
-		<button id="newgroup_btn">Create Group</button><br>
-		
-		<input type="text" id="addgroupname" placeholder="Group Name" />
-		<input type="text" id="addgroupmember" placeholder="Group Member" />
-		<button id="addmember_btn">Add Member</button><br>
-		
-		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
-	</div
+
+	</div>
 	<?php
 	
 	
@@ -152,14 +113,32 @@
 	// show/ not show certain type of event
 	// show others' calendar
 	// other functions
-	// not implemented yet
 	?>
-	<div class="sideBar">
-		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox"> work<br>
-		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox"> study<br>
-		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox"> entertainment<br>
-		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox"> others<br>
+	<div class="sideBar" id="sideBar">
+		<?php
+			if(isset($_SESSION['username'])){
+				echo "<p id = \"helloMessage\">Hellllllllo ".$_SESSION['username']."</p>";
+			}else{
+				echo "<p id = \"helloMessage\">Hi guest, please login or regeister first</p>";
+			}
+
+		?>
+		<input type="text" id="newgroupname" placeholder="Group Name" />
+		<button id="newgroup_btn">Create Group</button><br>
+		
+		<input type="text" id="addgroupname" placeholder="Group Name" />
+		<input type="text" id="addgroupmember" placeholder="Group Member" />
+		<button id="addmember_btn">Add Member</button><br><br><br>
+		
+		
+		<strong>Categories:</strong><br>
+		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox" checked> <label>work</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox" checked> <label>study</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox" checked> <label>entertainment</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox" checked> <label>others</label><br>
+		
 	</div>
+
 	<?php
 	
 	
@@ -190,26 +169,11 @@
 	}
 	?>
 	
-	<script type="text/javascript" src="eventController.js"></script>
+	
 	
 	<!--<p>trial</p>-->
 	
-	<!--<table>-->
-	<!--	<tr>-->
-	<!--		<th> Sun</th>-->
-	<!--		<th> Mon</th>-->
-	<!--	</tr>-->
-	<!--	<tr>-->
-	<!--		<td name=week10day1> <p id=01> 01 </p></td>-->
-	<!--		<td name=week10day2> <p id=02> 02 </p></td>-->
-	<!--	</tr>-->
-	<!--	<tr>-->
-	<!--		<td name=week10day3> <p id=03> 03 </p></td>-->
-	<!--		<td name=week10day4> <p id=04> 04 </p></td>-->
-	<!--	</tr>-->
-	<!--</table>-->
-	
-	You are logged in as: <?php echo $_SESSION['username'];?>
+
 	
 	<div class="calendar">
 		<div class = "CalendarButtons">
@@ -221,7 +185,13 @@
 	<?php
 	Calendar::showCalendar();
 	?>
-	<script type="text/javascript" src="calendarController.js"></script>
+	<div id="scripts">
+		<script type="text/javascript" src="calendarController.js"></script>
+		<script type="text/javascript" src="eventController.js"></script>
+		<script type="text/javascript" src="userController.js"></script>
+		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
+	</div>
+
 	</div>
 
 
