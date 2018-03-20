@@ -138,6 +138,10 @@ function showaddevent(clicked_id) {
 	$("#addevent"+clicked_id).dialog();
 }
 
+function modifyevent(clicked_id){
+	console.log("here inside modifyevent");
+}
+
 function showDialogAjax() {
 	console.log("here0");
 	//With help from:
@@ -145,16 +149,30 @@ function showDialogAjax() {
 	//$(document).ready(function(){
 		$("td").click(function(){
 			console.log("here1");
+			console.log(event.target.nodeName);
+			console.log(event.target.nodeName == 'P');
 			$(document).click(function(event) {
 				console.log("here2");
-				var data = $(event.target).attr('id');
-				console.log(event.target);
-				console.log(data);
-				if (isInt(data)) {
-					id = data;
+				if (event.target.nodeName == 'P'){
+					var data = $(event.target).attr('id');
+					console.log(event.target);
+					console.log(data);
+					if (isInt(data)) {
+						id = data;
+					}
+					console.log(id);
+					showaddevent(id);
+				} else if (event.target.nodeName == 'LI') {
+					var eventdata = $(event.target.parentNode.previousSibling).attr('id');
+					console.log(event.target.parentNode);
+					console.log(event.target.parentNode.previousSibling);
+					console.log(eventdata);
+					if (isInt(eventdata)) {
+						id = eventdata;
+					}
+					modifyevent(id);
+					console.log(id);
 				}
-				console.log(id);
-				showaddevent(id);
 			});
 		});
 	//});
