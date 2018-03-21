@@ -53,6 +53,11 @@
 		//require_once "global.php";
 		include "global.php";
 		sessionCheckStart();
+		
+		if (empty($_SESSION['token'])){
+					$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+		}
+				
 		$previous_ua = @$_SESSION['useragent'];
 		$current_ua = $_SERVER['HTTP_USER_AGENT'];
 		
@@ -182,6 +187,7 @@
 		<input type="radio" class="addeventcat" name="others" id="<?php echo 'cat_others'.$week.$day;?>" value="others"> others<br>
 		<input type="text" id="<?php echo 'gpname'.$week.$day;?>" placeholder="Group name (if applicable)" />
 		<input type="hidden" id="<?php echo 'addeventuser'.$week.$day;?>" value="<?php echo $_SESSION['username'];?>" />
+		<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
 
 		<button id="<?php echo 'addevent_btn'.$week.$day;?>">Submit</button><br>
 	</div>
@@ -207,6 +213,7 @@
 		<input type="radio" class="modeventcat" name="entertainment" id="modcat_entertainment" value="entertainment"> entertainment<br>
 		<input type="radio" class="modeventcat" name="others" id="modcat_others" value="others"> others<br>
 		<input type="hidden" id="modeventuser" value="<?php echo $_SESSION['username'];?>" />
+		<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
 		<label>Group: </label><input type="text" id="modgpname" />
 		<!--<input type="hidden" id="modpk"/>-->
 

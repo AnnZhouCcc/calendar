@@ -62,11 +62,15 @@
 		
 		static function addeventgroup($username, $title, $date, $time, $cat, $groupname) {
 			include "global.php";
+			sessionCheckStart();
 			
 			//if ($username == null){
 			//	return false;
 			//}
+			
+			//echo isset($_SESSION['username']);
 			if (isset($_SESSION['username']) != 1){
+				//echo "A";
 				return false;
 			}
 			
@@ -75,6 +79,7 @@
 			//the following chunk can potentially be summarized as a method under Group.php named fetchGroupIDByName
 			$stmt0 = $mysqli->prepare("SELECT id FROM Groups WHERE name=?");
 			if(!$stmt0){
+				//echo "B";
 				return false; //if the group name is non existent, it should come to this false
 			}
 			
@@ -90,6 +95,7 @@
 			
 			$stmt = $mysqli->prepare("insert into Events (title, time, category, Users_username, Groups_id) values (?, ?, ?, ?, ?)");
 			if(!$stmt){
+				//echo "C";
 				return false;
 			}
 			

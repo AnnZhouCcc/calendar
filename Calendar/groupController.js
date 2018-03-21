@@ -9,7 +9,7 @@ function newgroupAjax(event){
 	xmlHttp.open("POST", "groupController.php", true); // Starting a POST request (NEVER send passwords as GET variables!!!)
 	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // It's easy to forget this line for POST requests
 	xmlHttp.addEventListener("load", function(event){
-		alert(event.target.responseText);
+		console.log(event.target.responseText);
 		var jsonData = JSON.parse(event.target.responseText); // parse the JSON into a JavaScript object
 		if(jsonData.success){  // in PHP, this was the "success" key in the associative array; in JavaScript, it's the .success property of jsonData
 			alert("Creating new group completed!");
@@ -34,7 +34,7 @@ function addmemberAjax(event){
 	xmlHttp.open("POST", "groupController.php", true); 
 	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 	xmlHttp.addEventListener("load", function(event){
-		alert(event.target.responseText);
+		console.log(event.target.responseText);
 		var jsonData = JSON.parse(event.target.responseText); 
 		if(jsonData.success){  
 			alert("Member has been added!");
