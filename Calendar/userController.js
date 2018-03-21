@@ -24,7 +24,10 @@ function loginAjax(event){
 			$("#login_dialog").hide();
 			$("#register_dialog").hide();
 			$("#logout_btn").show();
-			$("#helloMessage").text("Hellllo"+username);
+			$("#helloMessage").text("Hellllo "+username);
+			refreshShareList();
+			document.getElementById("username").value = "";
+			document.getElementById("password").value = "";
 			
 		}else{
 			alert("You were not logged in.  "+jsonData.message);
@@ -56,6 +59,9 @@ function regAjax(event){
 		if(jsonData.success){  
 			alert("You've been registered!");
 			$("#registerform").dialog("close");
+			document.getElementById("regusername").value = "";
+			document.getElementById("regpassword").value = ""; 
+			document.getElementById("regemail").value = "";
 		}else{
 			alert("You were not successfully registered.  "+jsonData.message);
 		}
@@ -94,6 +100,8 @@ function logoutAjax(event){
 	$("#register_dialog").show();
 	$("#logout_btn").hide();
 	$("#helloMessage").text("Hi guest, please login or regeister first");
+	document.getElementsByName("share")[0].checked = true;
+	refreshShareList();
 }
 
 //alert("register"+document.getElementById("reg_btn"));

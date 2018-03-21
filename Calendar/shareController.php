@@ -24,7 +24,10 @@
 		}
 		
 		case "fetchShare":{
-			$shares=Share::getShares($_SESSION['username']);
+			$shares = array();
+			if(isset($_SESSION['username'])){
+				$shares=Share::getShares($_SESSION['username']);
+			}
 			echo json_encode($shares);
 			break;
 		}

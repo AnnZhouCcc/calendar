@@ -133,19 +133,20 @@
 	<div class="sideBar" id="sideBar">
 		<?php
 			if(isset($_SESSION['username'])){
-				echo "<p id = \"helloMessage\">Hellllllllo ".$_SESSION['username']."</p>";
+				echo "<strong id = \"helloMessage\">Hellllllllo ".$_SESSION['username']."</strong><br>";
 			}else{
-				echo "<p id = \"helloMessage\">Hi guest, please login or regeister first</p>";
+				echo "<strong id = \"helloMessage\">Hi guest, please login or regeister first</strong><br>";
 			}
 		?>
+		<br>
 		<input type="text" id="newgroupname" placeholder="Group Name" />
-		<button id="newgroup_btn">Create Group</button><br>
+		<button id="newgroup_btn">Create Group</button><br><br><br>
 		
 		<input type="text" id="addgroupname" placeholder="Group Name" />
-		<input type="text" id="addgroupmember" placeholder="Group Member" />
-		<button id="addmember_btn">Add Member</button><br>
+		<input type="text" id="addgroupmember" placeholder="Group Member" /><br>
+		<button id="addmember_btn">Add Member</button><br><br><br>
 		
-		<input type="text" id="sharename" placeholder="Who to share with" />
+		<input type="text" id="sharename" placeholder="Who to share with" /><br>
 		<button id="share_btn">Share</button><br><br><br>
 		
 
@@ -161,7 +162,7 @@
 		<br>
 		<strong>Show the calendar of:</strong>
 		<form class="shareCalendar" id="shareCalendar">
-			<input type="radio" name="share" id="<?php echo $_SESSION["username"]?>"><label>me</label>
+			<input type="radio" name="share" id="<?php echo $_SESSION["username"]?>" checked><label>me</label>
 		</form>
 		<button type="button" id="refreshShare">Refresh</button>
 	</div>
@@ -181,10 +182,10 @@
 	<div id="<?php echo 'addevent'.$week.$day;?>" title="Add Event">
 		<input type="text" id="<?php echo 'title'.$week.$day;?>" placeholder="Title" /><br>
 		<input type="time" id="<?php echo 'time'.$week.$day;?>"  /><br>
-		<input type="radio" class="addeventcat" name="work" id="<?php echo 'cat_work'.$week.$day;?>" value="work"> work<br>
-		<input type="radio" class="addeventcat" name="study" id="<?php echo 'cat_study'.$week.$day;?>" value="study"> study<br>
-		<input type="radio" class="addeventcat" name="entertainment" id="<?php echo 'cat_entertainment'.$week.$day;?>" value="entertainment"> entertainment<br>
-		<input type="radio" class="addeventcat" name="others" id="<?php echo 'cat_others'.$week.$day;?>" value="others"> others<br>
+		<input type="radio" class="addeventcat" name="cat" id="<?php echo 'cat_work'.$week.$day;?>" value="work"> work<br>
+		<input type="radio" class="addeventcat" name="cat" id="<?php echo 'cat_study'.$week.$day;?>" value="study"> study<br>
+		<input type="radio" class="addeventcat" name="cat" id="<?php echo 'cat_entertainment'.$week.$day;?>" value="entertainment"> entertainment<br>
+		<input type="radio" class="addeventcat" name="cat" id="<?php echo 'cat_others'.$week.$day;?>" value="others"> others<br>
 		<input type="text" id="<?php echo 'gpname'.$week.$day;?>" placeholder="Group name (if applicable)" />
 		<input type="hidden" id="<?php echo 'addeventuser'.$week.$day;?>" value="<?php echo $_SESSION['username'];?>" />
 		<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
@@ -208,10 +209,10 @@
 		<input type="text" id="trialtoo" /><br>-->
 		<input type="text" id="modtitle" value="<?php echo htmlentities($event->title); ?>"/><br>
 		<input type="time" id="modtime" value="<?php echo htmlentities($event->time); ?>"/><br>
-		<input type="radio" class="modeventcat" name="work" id="modcat_work" value="work"> work<br>
-		<input type="radio" class="modeventcat" name="study" id="modcat_study" value="study"> study<br>
-		<input type="radio" class="modeventcat" name="entertainment" id="modcat_entertainment" value="entertainment"> entertainment<br>
-		<input type="radio" class="modeventcat" name="others" id="modcat_others" value="others"> others<br>
+		<input type="radio" class="modeventcat" name="cat" id="modcat_work" value="work"> work<br>
+		<input type="radio" class="modeventcat" name="cat" id="modcat_study" value="study"> study<br>
+		<input type="radio" class="modeventcat" name="cat" id="modcat_entertainment" value="entertainment"> entertainment<br>
+		<input type="radio" class="modeventcat" name="cat" id="modcat_others" value="others"> others<br>
 		<input type="hidden" id="modeventuser" value="<?php echo $_SESSION['username'];?>" />
 		<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
 		<label>Group: </label><input type="text" id="modgpname" />

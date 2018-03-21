@@ -66,7 +66,7 @@ function refreshCalendar(event){
 }
 
 $(function(){
-	$("#refreshShare").click(refreshShareList());
+	$("#refreshShare").click(refreshShareList);
 });
 
 document.getElementsByName("share")[0].addEventListener("click",refreshCalendar,false);

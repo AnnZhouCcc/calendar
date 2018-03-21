@@ -19,14 +19,19 @@ function addeventAjax(event){
 	//With help from:
 	//https://stackoverflow.com/questions/4228356/integer-division-with-remainder-in-javascript
 	var numweek = Math.floor(id/10);
-	//console.log(numweek);
+	console.log("numweek:"+numweek);
 	var numday = id - numweek*10;
 	//console.log(numday);
 	
 	//With help from:
 	//https://stackoverflow.com/questions/2280104/convert-javascript-to-date-object-to-mysql-date-format-yyyy-mm-dd?noredirect=1&lq=1
 	//conversion from javascript time to mysql time
-	var weeks = currentMonth.getWeeks()[numweek];
+	var weeks;
+	if(numweek == 5){
+		weeks = currentMonth.getWeeks()[4].nextWeek();
+	}else{
+		weeks = currentMonth.getWeeks()[numweek];
+	}
 	//console.log(weeks);
 	var days = weeks.getDates()[numday];
 	//console.log(days);
@@ -76,10 +81,11 @@ function addeventAjax(event){
 		}else{
 			alert("Adding event failed.  "+jsonData.message);
 		}
+		$("#addevent"+id).dialog("close");
+		updateCalendar();
 	}, false);
 	xmlHttp.send(dataString);
-	$("#addevent"+id).dialog("close");
-	updateCalendar();
+
 }
 
 for (var i=0; i<6; i++){
@@ -98,7 +104,12 @@ function modeventAjax(event){
 	
 	var numweek = Math.floor(id/10);
 	var numday = id - numweek*10;
-	var weeks = currentMonth.getWeeks()[numweek];
+	var weeks;
+	if(numweek == 5){
+		weeks = currentMonth.getWeeks()[4].nextWeek();
+	}else{
+		weeks = currentMonth.getWeeks()[numweek];
+	}
 	var days = weeks.getDates()[numday];
 	var tzoffset = (new Date()).getTimezoneOffset() * 60000;
 	var localISOTime = (new Date(days - tzoffset)).toISOString().slice(0, -1);
@@ -134,10 +145,11 @@ function modeventAjax(event){
 		}else{
 			alert("Modifying event failed.  "+jsonData.message);
 		}
+		$("#modevent").dialog("close");
+		updateCalendar();
 	}, false);
 	xmlHttp.send(dataString);
-	$("#modevent").dialog("close");
-	updateCalendar();
+
 }
 
 document.getElementById("mod_btn").addEventListener("click", modeventAjax, false);
@@ -161,10 +173,11 @@ function deleteeventAjax(event){
 		}else{
 			alert("Deleting event failed.  "+jsonData.message);
 		}
+		$("#modevent").dialog("close");
+		updateCalendar();
 	}, false);
 	xmlHttp.send(dataString);
-	$("#modevent").dialog("close");
-	updateCalendar();
+
 }
 
 document.getElementById("delete_btn").addEventListener("click", deleteeventAjax, false);

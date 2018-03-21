@@ -6,14 +6,14 @@ updateCalendar();
 document.getElementById("next_month_btn").addEventListener("click", function(event){
 	currentMonth = currentMonth.nextMonth(); // get next month
 	updateCalendar(); // Whenever the month is updated, we'll need to re-render the calendar in HTML
-	alert("The new month is "+currentMonth.month+" "+currentMonth.year);
+	//alert("The new month is "+currentMonth.month+" "+currentMonth.year);
 }, false);
 
 // Change the month when the "previous month" button is pressed
 document.getElementById("previous_month_btn").addEventListener("click", function(event){
 	currentMonth = currentMonth.prevMonth(); // get previous month
 	updateCalendar(); // Whenever the month is updated, we'll need to re-render the calendar in HTML
-	alert("The new month is "+currentMonth.month+" "+currentMonth.year);
+	//alert("The new month is "+currentMonth.month+" "+currentMonth.year);
 }, false);
 
 console.log(categoriesMap);
