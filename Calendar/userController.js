@@ -28,6 +28,7 @@ function loginAjax(event){
 			refreshShareList();
 			document.getElementById("username").value = "";
 			document.getElementById("password").value = "";
+			document.getElementsByName("share")[0].setAttribute("id",username);
 			
 		}else{
 			alert("You were not logged in.  "+jsonData.message);
@@ -101,6 +102,7 @@ function logoutAjax(event){
 	$("#logout_btn").hide();
 	$("#helloMessage").text("Hi guest, please login or regeister first");
 	document.getElementsByName("share")[0].checked = true;
+	document.getElementsByName("share")[0].setAttribute("id","");
 	refreshShareList();
 }
 
