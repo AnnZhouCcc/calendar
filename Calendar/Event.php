@@ -111,6 +111,9 @@
 		static function modeventindiv($eventID, $username, $title, $date, $time, $cat) {
 			include "global.php";
 			
+			sessionCheckStart();
+			$username = $_SESSION['username'];
+			
 			if ($username == null){
 				//echo "username is null";
 				return false;
@@ -120,23 +123,30 @@
 			$isAuthh = False;
 			$stmt_check = $mysqli->prepare("SELECT Users_username FROM Events WHERE id=?");
 			if(!$stmt_check){
+				//echo "A";
 				return false; 
 			}
 			$stmt_check->bind_param('i', $eventID);
 			$stmt_check->execute();
 			$stmt_check->bind_result($check_authh); //double h here
 			while($stmt_check->fetch()){
+				//echo "check_authh0: ".$check_authh;
+				//echo "username0: ".$username;
 				if ($check_authh == $username){
+					//echo "check_authh: ".$check_authh;
 					$isAuthh = True;
 				}
 			}	
 			if($isAuthh == False){
+				//echo "isAuthh: ".$isAuthh;
+				//echo "B";
 				return false;
 			} else{
 				$datetime = $date." ".$time.":00";
 				$stmt = $mysqli->prepare("update Events set title=?, time=?, category=?, Users_username=? where id=?");
 				if(!$stmt){
 					prinf ("Query Prep Failed: %s\n", $mysqli->error);
+					//echo "C";
 					return false;
 				}
 				$stmt->bind_param('ssssi', $title, $datetime, $cat, $username, $eventID);
@@ -148,6 +158,9 @@
 		
 		static function modeventgroup($eventID, $username, $title, $date, $time, $cat, $groupname) {
 			include "global.php";
+			
+			sessionCheckStart();
+			$username = $_SESSION['username'];
 			
 			if ($username == null){
 				return false;
@@ -231,8 +244,7 @@
 		static function fetchDay($date){
 			include "global.php";
 			$resultEvents=array();
-			$resultEvents = $resultEvents+self::fetchDayByUser($date);
-			$resultEvents = $resultEvents+self::fetchDayByGroup($date);
+			$resultEvents = array_merge(self::fetchDayByUser($date), self::fetchDayByGroup($date));
 			usort($resultEvents,"Event::compareTo"); // sort all events base on thier time.
 			//echo "I am here";
 			return $resultEvents;
