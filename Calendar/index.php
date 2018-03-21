@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
 	<title>Home</title>
 	
 	<style>
 		<?php
+		ini_set("session.cookie_httponly", 1);
 			for($week =0; $week<6;$week++){
 				for($day = 0;$day < 7;$day++){
 					echo "#addevent".$week.$day."{display:none}";
@@ -15,17 +16,17 @@
 		#loginform { display:none }
 	</style>
 	
-	<script src="global.js" type="text/javascript"></script>
+	<script src="global.js" ></script>
 	
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" /> <!-- We need the style sheet linked above or the dialogs/other parts of jquery-ui won't display correctly!-->
 	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script><!-- The main library.  Note: must be listed before the jquery-ui library -->
+	<script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script><!-- The main library.  Note: must be listed before the jquery-ui library -->
 	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script><!-- jquery-UI  hosted on Google's Ajax CDN-->
+	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script><!-- jquery-UI  hosted on Google's Ajax CDN-->
 	<!-- Note: you can download the javascript file from the link provided on the google doc, or simply provide its URL in the src attribute (microsoft and google also host the jQuery library-->
 
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="global.js" type="text/javascript"></script>
+	<script src="global.js" ></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -49,6 +50,14 @@
 		//require_once "global.php";
 		include "global.php";
 		sessionCheckStart();
+		$previous_ua = @$_SESSION['useragent'];
+		$current_ua = $_SERVER['HTTP_USER_AGENT'];
+		
+		if(isset($_SESSION['useragent']) && $previous_ua !== $current_ua){
+			die("Session hijack detected");
+		}else{
+			$_SESSION['useragent'] = $current_ua;
+		}
 	?>
 	<!--Top navigation bar-->
 	<ul class="navBar" id= "navBar">
@@ -136,10 +145,12 @@
 		
 		
 		<strong>Categories:</strong><br>
-		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox" checked> <label class="work">work</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox" checked> <label class="study">study</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox" checked> <label class="entertainment">entertainment</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox" checked> <label class="others">others</label><br>
+		<ul class="eventsCheck">
+			<li class="workCheck"><input type="checkbox" class="categoriesCheckBox" name="workCheckbox" checked> <label >work</label><br></li>
+			<li class="studyCheck"><input type="checkbox" class="categoriesCheckBox" name="studyCheckbox" checked> <label >study</label><br></li>
+			<li class="entertainmentCheck"><input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox" checked> <label >entertainment</label><br></li>
+			<li class="othersCheck"><input type="checkbox" class="categoriesCheckBox" name="othersCheckbox" checked> <label >others</label><br></li>
+		</ul>
 		<br>
 		<strong>Show the calendar of:</strong>
 		<form class="shareCalendar" id="shareCalendar">
@@ -162,7 +173,7 @@
 	
 	<div id="<?php echo 'addevent'.$week.$day;?>" title="Add Event">
 		<input type="text" id="<?php echo 'title'.$week.$day;?>" placeholder="Title" /><br>
-		<input type="time" id="<?php echo 'time'.$week.$day;?>" placeholder="Time" /><br>
+		<input type="time" id="<?php echo 'time'.$week.$day;?>"  /><br>
 		<input type="radio" class="addeventcat" name="work" id="<?php echo 'cat_work'.$week.$day;?>" value="work"> work<br>
 		<input type="radio" class="addeventcat" name="study" id="<?php echo 'cat_study'.$week.$day;?>" value="study"> study<br>
 		<input type="radio" class="addeventcat" name="entertainment" id="<?php echo 'cat_entertainment'.$week.$day;?>" value="entertainment"> entertainment<br>
@@ -187,7 +198,7 @@
 	<div class="calendar">
 		<div class = "CalendarButtons">
 		<button id="previous_month_btn">previous month</button>
-		<label>this month</label>
+		<label id="thisMonth">this month</label>
 		<button id="next_month_btn">next month</button>
 		
 		</div>
@@ -195,11 +206,11 @@
 	Calendar::showCalendar();
 	?>
 	<div id="scripts">
-		<script type="text/javascript" src="shareController.js"></script>
-		<script type="text/javascript" src="calendarController.js"></script>
-		<script type="text/javascript" src="eventController.js"></script>
-		<script type="text/javascript" src="userController.js"></script>
-		<script type="text/javascript" src="groupController.js"></script> <!-- load the JavaScript file -->
+		<script src="shareController.js"></script>
+		<script src="calendarController.js"></script>
+		<script src="eventController.js"></script>
+		<script src="userController.js"></script>
+		<script src="groupController.js"></script> <!-- load the JavaScript file -->
 	</div>
 
 	</div>

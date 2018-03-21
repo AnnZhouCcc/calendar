@@ -1,9 +1,6 @@
 <?php
 	// Event class
-	interface Comparable {
-    public function compareTo($other);
-}
-	class Event implements Comparable{
+	class Event{
 		public $id;
 		public $title;
 		public $time;
@@ -100,7 +97,7 @@
 			$resultEvents=array();
 			$resultEvents = $resultEvents+self::fetchDayByUser($date);
 			$resultEvents = $resultEvents+self::fetchDayByGroup($date);
-			sort($resultEvents); // sort all events base on thier time.
+			usort($resultEvents,"Event::compareTo"); // sort all events base on thier time.
 			//echo "I am here";
 			return $resultEvents;
 		}
@@ -161,12 +158,12 @@
 		}
 		
 		// compare two events base on their time.
-		public function compareTo($other){
+		static public function compareTo($me,$value){
 			if($value instanceof Event){
-				if($self->time>$value->time){
+				if($me->time>$value->time){
 					return 1;
 				}
-				if($self->time<$value->time){
+				if($me->time<$value->time){
 					return -1;
 				}else{
 					return 0;
