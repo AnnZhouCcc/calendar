@@ -209,6 +209,9 @@
 		static function deleteevent($username, $eventID) {
 			include "global.php";
 			
+			sessionCheckStart();
+			$username = $_SESSION['username'];
+			
 			//check the identity of the user first
 			$isAuth = False;
 			$stmt_check = $mysqli->prepare("SELECT Users_username FROM Events WHERE id=?");
