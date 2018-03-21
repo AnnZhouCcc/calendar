@@ -143,10 +143,11 @@ document.getElementById("mod_btn").addEventListener("click", modeventAjax, false
 
 function deleteeventAjax(event){
 	var pk = pkofevent;
+	var username = document.getElementById("modeventuser").value;
 	
 	var type = "deleteevent";
 	
-	var dataString = "pk=" + encodeURIComponent(pk) + "&type=" + encodeURIComponent(type);
+	var dataString = "pk=" + encodeURIComponent(pk) + "&type=" + encodeURIComponent(type) + "&username=" + encodeURIComponent(username);
 	
 	var xmlHttp = new XMLHttpRequest(); 
 	xmlHttp.open("POST", "eventController.php", true); 

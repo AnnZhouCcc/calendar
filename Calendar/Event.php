@@ -97,25 +97,34 @@
 				return false;
 			}
 			
-			$datetime = $date." ".$time.":00";
-			$stmt = $mysqli->prepare("update Events set title=?, time=?, category=?, Users_username=? where id=?");
-			if(!$stmt){
-				prinf ("Query Prep Failed: %s\n", $mysqli->error);
-				return false;
+			//check the identity of the user first
+			$isAuthh = False;
+			$stmt_check = $mysqli->prepare("SELECT Users_username FROM Events WHERE id=?");
+			if(!$stmt_check){
+				return false; 
 			}
-			
-			//echo $title;
-			//echo $datetime;
-			//echo $cat;
-			//echo $username;
-			
-			$stmt->bind_param('ssssi', $title, $datetime, $cat, $username, $eventID);
-			
-			$stmt->execute();
-			
-			$stmt->close();
-			
-			return true;
+			$stmt_check->bind_param('i', $eventID);
+			$stmt_check->execute();
+			$stmt_check->bind_result($check_authh); //double h here
+			while($stmt_check->fetch()){
+				if ($check_authh == $username){
+					$isAuthh = True;
+				}
+			}	
+			if($isAuthh == False){
+				return false;
+			} else{
+				$datetime = $date." ".$time.":00";
+				$stmt = $mysqli->prepare("update Events set title=?, time=?, category=?, Users_username=? where id=?");
+				if(!$stmt){
+					prinf ("Query Prep Failed: %s\n", $mysqli->error);
+					return false;
+				}
+				$stmt->bind_param('ssssi', $title, $datetime, $cat, $username, $eventID);
+				$stmt->execute();
+				$stmt->close();
+				return true;
+			}
 		}
 		
 		static function modeventgroup($eventID, $username, $title, $date, $time, $cat, $groupname) {
@@ -125,54 +134,76 @@
 				return false;
 			}
 			
-			$datetime = $date." ".$time.":00";
-			
-			//the following chunk can potentially be summarized as a method under Group.php named fetchGroupIDByName
-			$stmt0 = $mysqli->prepare("SELECT id FROM Groups WHERE name=?");
-			if(!$stmt0){
-				return false; //if the group name is non existent, it should come to this false
+			//check the identity of the user first
+			$isAuthhh = False;
+			$stmt_check = $mysqli->prepare("SELECT Users_username FROM Events WHERE id=?");
+			if(!$stmt_check){
+				return false; 
 			}
-			
-			$stmt0->bind_param('s', $groupname);
-				
-			$stmt0->execute();
-			
-			$stmt0->bind_result($outputtt_groupid); //triple t here
-			
-			$stmt0->fetch();
-			
-			$stmt0->close();
-			
-			$stmt = $mysqli->prepare("update Events set title=?, time=?, category=?, Users_username=?, Groups_id=? where id=?");
-			if(!$stmt){
+			$stmt_check->bind_param('i', $eventID);
+			$stmt_check->execute();
+			$stmt_check->bind_result($check_authhh); //triple h here
+			while($stmt_check->fetch()){
+				if ($check_authhh == $username){
+					$isAuthhh = True;
+				}
+			}	
+			if($isAuthhh == False){
 				return false;
+			} else{
+				$datetime = $date." ".$time.":00";
+				//the following chunk can potentially be summarized as a method under Group.php named fetchGroupIDByName
+				$stmt0 = $mysqli->prepare("SELECT id FROM Groups WHERE name=?");
+				if(!$stmt0){
+					return false; //if the group name is non existent, it should come to this false
+				}
+				$stmt0->bind_param('s', $groupname);
+				$stmt0->execute();
+				$stmt0->bind_result($outputtt_groupid); //triple t here
+				$stmt0->fetch();
+				$stmt0->close();
+				
+				$stmt = $mysqli->prepare("update Events set title=?, time=?, category=?, Users_username=?, Groups_id=? where id=?");
+				if(!$stmt){
+					return false;
+				}
+				$stmt->bind_param('ssssii', $title, $datetime, $cat, $username, $outputtt_groupid, $eventID);
+				$stmt->execute();
+				$stmt->close();
+				return true;
 			}
-			
-			$stmt->bind_param('ssssii', $title, $datetime, $cat, $username, $outputtt_groupid, $eventID);
-			
-			$stmt->execute();
-			
-			$stmt->close();
-			
-			return true;
 		}
 		
-		static function deleteevent($eventID) {
+		static function deleteevent($username, $eventID) {
 			include "global.php";
 			
-			$stmt = $mysqli->prepare("delete from Events where id=?");
-			if(!$stmt){
-				prinf ("Query Prep Failed: %s\n", $mysqli->error);
-				return false;
+			//check the identity of the user first
+			$isAuth = False;
+			$stmt_check = $mysqli->prepare("SELECT Users_username FROM Events WHERE id=?");
+			if(!$stmt_check){
+				return false; 
 			}
-			
-			$stmt->bind_param('i', $eventID);
-			
-			$stmt->execute();
-			
-			$stmt->close();
-			
-			return true;
+			$stmt_check->bind_param('i', $eventID);
+			$stmt_check->execute();
+			$stmt_check->bind_result($check_auth);
+			while($stmt_check->fetch()){
+				if ($check_auth == $username){
+					$isAuth = True;
+				}
+			}	
+			if($isAuth == False){
+				return false;
+			} else{
+				$stmt = $mysqli->prepare("delete from Events where id=?");
+				if(!$stmt){
+					prinf ("Query Prep Failed: %s\n", $mysqli->error);
+					return false;
+				}
+				$stmt->bind_param('i', $eventID);
+				$stmt->execute();
+				$stmt->close();
+				return true;
+			}
 		}
 		
 		// this function will return all the events in a day

@@ -45,7 +45,7 @@
 				}else{
 					echo json_encode(array(
 						"success" => false,
-						"message" => "Unsuccessful"
+						"message" => "Unauthorized"
 					));
 					exit;
 				}
@@ -55,8 +55,9 @@
 		
 		case "deleteevent":{
 			$eventID = $_POST['pk'];
+			$username = $_POST['username'];
 	
-			if(Event::deleteevent($eventID)){
+			if(Event::deleteevent($username, $eventID)){
 				echo json_encode(array(
 					"success" => true
 				));
@@ -64,7 +65,7 @@
 			}else{
 				echo json_encode(array(
 					"success" => false,
-					"message" => "Unsuccessful"
+					"message" => "Unauthorized"
 				));
 				exit;
 			}
