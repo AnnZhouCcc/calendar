@@ -146,6 +146,8 @@ function showaddevent(clicked_id) {
 //}
 
 function showDialogAjax() {
+	//var user = '<?php echo $_SESSION["username"] ?>';
+	//console.log(user);
 	//console.log("here0");
 	//With help from:
 	//https://stackoverflow.com/questions/41373686/event-target-id-or-this-attrid-not-working-in-firefox
@@ -162,9 +164,11 @@ function showDialogAjax() {
 					//console.log(data);
 					if (isInt(data)) {
 						id = data;
+						//if ( hasUser == true ){
+							showaddevent(id);
+						//}
 					}
 					//console.log(id);
-					showaddevent(id);
 				} else if (event.target.nodeName == 'LI') {
 					var eventid = $(event.target.parentNode.previousSibling).attr('id');
 					console.log(eventid);

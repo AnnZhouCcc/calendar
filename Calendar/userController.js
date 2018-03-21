@@ -1,4 +1,5 @@
 function loginAjax(event){
+	//hasUser = true;
 	var username = document.getElementById("username").value; // Get the username from the form
 	var password = document.getElementById("password").value; // Get the password from the form
 	var act = "login";
@@ -67,6 +68,7 @@ function regAjax(event){
 document.getElementById("reg_btn").addEventListener("click", regAjax, false);
 
 function logoutAjax(event){
+	//hasUser = false;
 	console.log("into logout");
 	var act = "logout";
 	

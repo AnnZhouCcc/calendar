@@ -12,6 +12,7 @@ categoriesMap.set("othersCheckbox","others");
 var currentMonth = new Month(2018, 2); // October 2017
 var id = 0;
 var pkofevent = 0;
+//var hasUser = false;
 
 
 

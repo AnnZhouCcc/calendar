@@ -21,13 +21,23 @@
 		
 		static function addeventindiv($username, $title, $date, $time, $cat) {
 			include "global.php";
+			sessionCheckStart();
 			
-			echo "into Event php addeventindiv";
+			//echo "into Event php addeventindiv";
+			//echo "here: ".$username;
+			//$check = ($username == null);
+			//echo $check;
 			
-			if ($username == null){
-				echo "username is null";
+			//echo isset($_SESSION['username']);
+			
+			if (isset($_SESSION['username']) != 1){
 				return false;
 			}
+			
+			//if ($username == null){
+			//	//echo "username is null";
+			//	return false;
+			//}
 			
 			$datetime = $date." ".$time.":00";
 			$stmt = $mysqli->prepare("insert into Events (title, time, category, Users_username) values (?, ?, ?, ?)");
@@ -36,10 +46,10 @@
 				return false;
 			}
 			
-			echo $title;
-			echo $datetime;
-			echo $cat;
-			echo $username;
+			//echo $title;
+			//echo $datetime;
+			//echo $cat;
+			//echo $username;
 			
 			$stmt->bind_param('ssss', $title, $datetime, $cat, $username);
 			
@@ -53,7 +63,10 @@
 		static function addeventgroup($username, $title, $date, $time, $cat, $groupname) {
 			include "global.php";
 			
-			if ($username == null){
+			//if ($username == null){
+			//	return false;
+			//}
+			if (isset($_SESSION['username']) != 1){
 				return false;
 			}
 			
@@ -93,7 +106,7 @@
 			include "global.php";
 			
 			if ($username == null){
-				echo "username is null";
+				//echo "username is null";
 				return false;
 			}
 			

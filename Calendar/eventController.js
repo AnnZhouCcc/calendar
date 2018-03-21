@@ -10,6 +10,7 @@ function addeventAjax(event){
 	
 	var username = document.getElementById("addeventuser"+id).value;
 	//console.log(username);
+	//console.log(username == null);
 	var title = document.getElementById("title"+id).value;
 	//console.log(title);
 	var time = document.getElementById("time"+id).value;
