@@ -55,27 +55,46 @@
             $stmt_check->execute();
             $stmt_check->bind_result($check_existence);
             while($stmt_check->fetch()){
-                if ($check_existence == $sharename){
+                if ($check_existence == True){
                     $isMatched = True;
                 }
             }   
             if($isMatched == True){
                 
-                //we can proceed with putting info into share table
-                $stmt = $mysqli->prepare("insert into Calendar_Share_Access (Users_username, share_with) values (?, ?)");
-                if(!$stmt){
-                    return false;
-                }
-                //echo $username;
-                //echo $sharename;
-                $stmt->bind_param('ss', $username, $sharename);
-                $stmt->execute();
-                $stmt->close();
-                return true;
+				//check whether repeated
+				$isRep = True;
+				$stmt_check2 = $mysqli->prepare("SELECT share_with FROM Calendar_Share_Access WHERE EXISTS(SELECT share_with FROM Calendar_Share_Access WHERE username=?)");      
+				if(!$stmt_check2) {
+					return false;
+				}
+				$stmt_check2->bind_param('s', $username);
+				$stmt_check2->execute();
+				$stmt_check2->bind_result($check_rep);
+				while($stmt_check2->fetch()){
+					if ($check_rep == False){
+						$isRep = False;
+					}
+				}   
+				if($isRep == False){
+				
+					//we can proceed with putting info into share table
+					$stmt = $mysqli->prepare("insert into Calendar_Share_Access (Users_username, share_with) values (?, ?)");
+					if(!$stmt){
+						return false;
+					}
+					//echo $username;
+					//echo $sharename;
+					$stmt->bind_param('ss', $username, $sharename);
+					$stmt->execute();
+					$stmt->close();
+					return true;
             
-            } else{
-                return false;
-            }
+				} else{
+					return false;
+				}
+			} else{
+				return false;
+			}
         }
 	}
 ?>
