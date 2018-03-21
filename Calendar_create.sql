@@ -1,10 +1,10 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2018-03-08 16:25:06.287
+-- Last modification date: 2018-03-21 11:50:03.783
 
 -- tables
 -- Table: Calendar_Share_Access
 CREATE TABLE Calendar_Share_Access (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     Users_username varchar(50) NOT NULL,
     share_with varchar(50) NOT NULL,
     CONSTRAINT Calendar_Share_Access_pk PRIMARY KEY (id)
@@ -13,11 +13,11 @@ CREATE TABLE Calendar_Share_Access (
 -- Table: Events
 CREATE TABLE Events (
     id int NOT NULL AUTO_INCREMENT,
-    Title varchar(50) NOT NULL,
-    time time NOT NULL,
+    title varchar(50) NOT NULL,
+    time datetime NOT NULL,
     category enum('work','study','entertainment','others') NOT NULL,
     Users_username varchar(50) NULL,
-    Groups_id int NOT NULL,
+    Groups_id int NULL,
     CONSTRAINT Events_pk PRIMARY KEY (id)
 );
 

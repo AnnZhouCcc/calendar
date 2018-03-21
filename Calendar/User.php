@@ -134,6 +134,7 @@
 				
 				$_SESSION['token'] = substr(md5(rand()), 0, 10);
 				$_SESSION['username'] = $username;
+				$_SESSION['calendarUser']=$username;
 				return true;
 			} else{
 				// Login failed

@@ -88,13 +88,7 @@ function addeventAjax(event){
 
 }
 
-for (var i=0; i<6; i++){
-	for (var j=0; j<7; j++){
-		const i2 = i;
-		const j2 = j;
-		document.getElementById("addevent_btn"+i2+j2).addEventListener("click", addeventAjax, false);
-	}
-}
+
 
 function modeventAjax(event){
 	var pk = pkofevent;
@@ -152,7 +146,7 @@ function modeventAjax(event){
 
 }
 
-document.getElementById("mod_btn").addEventListener("click", modeventAjax, false);
+
 
 function deleteeventAjax(event){
 	var pk = pkofevent;
@@ -181,3 +175,12 @@ function deleteeventAjax(event){
 }
 
 document.getElementById("delete_btn").addEventListener("click", deleteeventAjax, false);
+document.getElementById("mod_btn").addEventListener("click", modeventAjax, false);
+for (var i=0; i<6; i++){
+	for (var j=0; j<7; j++){
+		const i2 = i;
+		const j2 = j;
+		document.getElementById("addevent_btn"+i2+j2).addEventListener("click", addeventAjax, false);
+	}
+}	
+

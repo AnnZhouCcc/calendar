@@ -30,10 +30,10 @@
 			
 			//echo isset($_SESSION['username']);
 			
-			if (isset($_SESSION['username']) != 1){
+			if (isset($_SESSION['username']) != 1 || $_SESSION['username']!=$_SESSION['calendarUser']){
 				return false;
 			}
-			
+			$username = $_SESSION['username'];
 			//if ($username == null){
 			//	//echo "username is null";
 			//	return false;
@@ -69,10 +69,10 @@
 			//}
 			
 			//echo isset($_SESSION['username']);
-			if (isset($_SESSION['username']) != 1){
-				//echo "A";
+			if (isset($_SESSION['username']) != 1 || $_SESSION['username']!=$_SESSION['calendarUser']){
 				return false;
 			}
+			$username = $_SESSION['username'];
 			
 			$datetime = $date." ".$time.":00";
 			
