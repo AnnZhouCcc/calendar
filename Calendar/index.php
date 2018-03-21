@@ -13,6 +13,7 @@
 		?>
 		#registerform { display:none }
 		#loginform { display:none }
+		#modevent { display:none }
 	</style>
 	
 	<script src="global.js" type="text/javascript"></script>
@@ -32,6 +33,8 @@
 	
 	<script>
 		$.noConflict();
+		
+		var pkofevent = pkofevent;
 	//$( function() {
 	//  $( "#dialog" ).dialog({
 	//	autoOpen: false,
@@ -120,7 +123,6 @@
 			}else{
 				echo "<p id = \"helloMessage\">Hi guest, please login or regeister first</p>";
 			}
-
 		?>
 		<input type="text" id="newgroupname" placeholder="Group Name" />
 		<button id="newgroup_btn">Create Group</button><br>
@@ -171,13 +173,32 @@
 	<?php
 		}
 	}
+	
+	$eventID = "<script>document.writeln(pkofevent);</script>";
+	$event = Event::fetchEventByID($eventID);
+	//echo $eventID;
 	?>
 	
 	
 	
-	<!--<p>trial</p>-->
-	
+	<div id="modevent" title="Modify or Delete Event">
+		<!--<p id="trial"></p>
+		<input type="text" id="trialtoo" /><br>-->
+		<input type="text" id="modtitle" value="<?php echo htmlentities($event->title); ?>"/><br>
+		<input type="time" id="modtime" value="<?php echo htmlentities($event->time); ?>"/><br>
+		<input type="radio" class="modeventcat" name="work" id="modcat_work" value="work"> work<br>
+		<input type="radio" class="modeventcat" name="study" id="modcat_study" value="study"> study<br>
+		<input type="radio" class="modeventcat" name="entertainment" id="modcat_entertainment" value="entertainment"> entertainment<br>
+		<input type="radio" class="modeventcat" name="others" id="modcat_others" value="others"> others<br>
+		<input type="hidden" id="modeventuser" value="<?php echo $_SESSION['username'];?>" />
+		<label>Group: </label><input type="text" id="modgpname" />
+		<!--<input type="hidden" id="modpk"/>-->
 
+		<button id="mod_btn">Submit</button><br>
+		<button id="delete_btn">Delete</button><br>
+	</div>
+	
+	<!--<script type="text/javascript" src="eventController.js"></script>-->
 	
 	<div class="calendar">
 		<div class = "CalendarButtons">
@@ -186,6 +207,7 @@
 		<button id="next_month_btn">next month</button>
 		
 		</div>
+		
 	<?php
 	Calendar::showCalendar();
 	?>

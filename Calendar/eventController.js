@@ -88,3 +88,81 @@ for (var i=0; i<6; i++){
 		document.getElementById("addevent_btn"+i2+j2).addEventListener("click", addeventAjax, false);
 	}
 }
+
+function modeventAjax(event){
+	var pk = pkofevent;
+	var username = document.getElementById("modeventuser").value;
+	var title = document.getElementById("modtitle").value;
+	var time = document.getElementById("modtime").value;
+	
+	var numweek = Math.floor(id/10);
+	var numday = id - numweek*10;
+	var weeks = currentMonth.getWeeks()[numweek];
+	var days = weeks.getDates()[numday];
+	var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+	var localISOTime = (new Date(days - tzoffset)).toISOString().slice(0, -1);
+	var date = (localISOTime.slice(0, 10));
+	
+	var cat;
+    if (document.getElementById('modcat_work').checked){
+        cat = "work";
+    } else if (document.getElementById('modcat_study').checked){
+        cat = "study";
+    } else if (document.getElementById('modcat_entertainment').checked){
+        cat = "entertainment";
+    } else if (document.getElementById('modcat_others').checked){
+        cat = "others";
+    }
+	
+	var type = "modevent";
+	
+	var dataString = "username=" + encodeURIComponent(username) + "&title=" + encodeURIComponent(title) + "&time=" + encodeURIComponent(time) + "&cat=" + encodeURIComponent(cat) + "&type=" + encodeURIComponent(type) + "&date=" + encodeURIComponent(date) + "&pk=" + encodeURIComponent(pk);
+	if (document.getElementById("modgpname").value != null) {
+		var groupname = document.getElementById("modgpname").value;
+		dataString = dataString + "&groupname=" + encodeURIComponent(groupname);
+	}
+	
+	var xmlHttp = new XMLHttpRequest(); 
+	xmlHttp.open("POST", "eventController.php", true); 
+	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+	xmlHttp.addEventListener("load", function(event){
+		console.log(event.target.responseText);
+		var jsonData = JSON.parse(event.target.responseText); 
+		if(jsonData.success){  
+			alert("Event has been modified!");
+		}else{
+			alert("Modifying event failed.  "+jsonData.message);
+		}
+	}, false);
+	xmlHttp.send(dataString);
+	$("#modevent").dialog("close");
+	updateCalendar();
+}
+
+document.getElementById("mod_btn").addEventListener("click", modeventAjax, false);
+
+function deleteeventAjax(event){
+	var pk = pkofevent;
+	
+	var type = "deleteevent";
+	
+	var dataString = "pk=" + encodeURIComponent(pk) + "&type=" + encodeURIComponent(type);
+	
+	var xmlHttp = new XMLHttpRequest(); 
+	xmlHttp.open("POST", "eventController.php", true); 
+	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+	xmlHttp.addEventListener("load", function(event){
+		console.log(event.target.responseText);
+		var jsonData = JSON.parse(event.target.responseText); 
+		if(jsonData.success){  
+			alert("Event has been deleted!");
+		}else{
+			alert("Deleting event failed.  "+jsonData.message);
+		}
+	}, false);
+	xmlHttp.send(dataString);
+	$("#modevent").dialog("close");
+	updateCalendar();
+}
+
+document.getElementById("delete_btn").addEventListener("click", deleteeventAjax, false);

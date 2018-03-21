@@ -6,7 +6,7 @@
     //echo "C";
     //echo $type;
 	switch ($type){
-		case "addevent":
+		case "addevent":{
 	//if ($type == 'addevent'){
             //echo "into addevent switch case";
 			$username = $_POST['username'];
@@ -50,5 +50,65 @@
 					exit;
 				}
 			}
+			break;
+		}
+		
+		case "deleteevent":{
+			$eventID = $_POST['pk'];
+	
+			if(Event::deleteevent($eventID)){
+				echo json_encode(array(
+					"success" => true
+				));
+				exit;
+			}else{
+				echo json_encode(array(
+					"success" => false,
+					"message" => "Unsuccessful"
+				));
+				exit;
+			}
+			
+			break;
+		}
+		
+		case "modevent":{
+			$username = $_POST['username'];
+			$title = $_POST['title'];
+			$time = $_POST['time'];
+			$date = $_POST['date'];
+			$cat = $_POST['cat'];
+			$eventID = $_POST['pk'];
+			
+			if ($_POST['groupname'] == null) {
+				if(Event::modeventindiv($eventID, $username, $title, $date, $time, $cat)){
+					echo json_encode(array(
+						"success" => true
+					));
+					exit;
+				}else{
+					echo json_encode(array(
+						"success" => false,
+						"message" => "Unsuccessful"
+					));
+					exit;
+				}
+			} else {
+				$groupname = $_POST['groupname'];
+				if(Event::modeventgroup($eventID, $username, $title, $date, $time, $cat, $groupname)){
+					echo json_encode(array(
+						"success" => true
+					));
+					exit;
+				}else{
+					echo json_encode(array(
+						"success" => false,
+						"message" => "Unsuccessful"
+					));
+					exit;
+				}
+			}
+			break;
+		}
 	}
 ?>

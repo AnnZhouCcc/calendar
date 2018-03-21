@@ -19,20 +19,20 @@ document.getElementById("previous_month_btn").addEventListener("click", function
 console.log(categoriesMap);
 // See/not see certain category
 for(var [key,value] of categoriesMap.entries()){
-	console.log(key+value);
+	//console.log(key+value);
 	// hard to explain, but it have to be this way
 	const key2=key;
 	const value2=value;
 	document.getElementsByName(""+key)[0].addEventListener("click", function (event){
-		console.log(key);
+		//console.log(key);
 		var checkBox = document.getElementsByName(key2)[0];
-		console.log(""+value2);
+		//console.log(""+value2);
 		var events = document.getElementsByClassName(value2);
-		console.log(events);
+		//console.log(events);
 		var index ;
 		for(index = 0;index<events["length"];index++){
-			console.log(index);
-			console.log(events[index]);
+			//console.log(index);
+			//console.log(events[index]);
 			if (checkBox.checked == true){
 					events[index].style.display = "block";
 				} else {
@@ -48,12 +48,12 @@ for(var [key,value] of categoriesMap.entries()){
 // it to modify the DOM (optionally using jQuery) to display the days and weeks in the current month.
 function updateCalendar(){
 	var weeks = currentMonth.getWeeks();
-	console.log(weeks.length);
+	//console.log(weeks.length);
 	// some month have 5 weeks, some month have 6 weeks. Make all of them have 6 weeks.
 	if(weeks.length == 5){
 		weeks.push(weeks[4].nextWeek());
 	}
-	console.log(weeks.length);
+	//console.log(weeks.length);
 	for(var w in weeks){
 		var days = weeks[w].getDates();
 		// days contains normal JavaScript Date objects.
@@ -71,7 +71,7 @@ function updateCalendar(){
 			var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 			var localISOTime = (new Date(days[d] - tzoffset)).toISOString().slice(0, -1);
 			updateADay(localISOTime.slice(0, 19).replace('T', ' '),w,d);
-			console.log(days[d].toISOString(),w,d);
+			//console.log(days[d].toISOString(),w,d);
 		}
 	}
 
@@ -113,9 +113,10 @@ function updateADay(sqlDate,week,day){
 			ul.setAttribute('class','events');
 			for(var aEvent in eventsData){
 				var li = document.createElement("li");
-				console.log(eventsData[aEvent].title);
+				//console.log(eventsData[aEvent].title);
+				//console.log(eventsData[aEvent].time);
 				//li.innerHtml = ""+eventsData[aEvent].title; // do not use this. not working
-				li.appendChild(document.createTextNode(eventsData[aEvent].title));
+				li.appendChild(document.createTextNode(eventsData[aEvent].time.substring(11,16)+" "+eventsData[aEvent].title));
 				li.setAttribute('class',eventsData[aEvent].category);
 				ul.appendChild(li);
 			}
@@ -134,25 +135,26 @@ function isInt(value) {
 //With help from:
 //https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
 function showaddevent(clicked_id) {
-	console.log("here3");
+	//console.log("here3");
 	$("#addevent"+clicked_id).dialog();
 }
 
 //function modifyevent(clicked_id){
-//	console.log("here inside modifyevent");
+//	console.log("inside modifyevent");
+//	
 //}
 
 function showDialogAjax() {
-	console.log("here0");
+	//console.log("here0");
 	//With help from:
 	//https://stackoverflow.com/questions/41373686/event-target-id-or-this-attrid-not-working-in-firefox
 	//$(document).ready(function(){
 		//$("td").click(function(){
-			console.log("here1");
+			//console.log("here1");
 			//console.log(event.target.nodeName);
 			//console.log(event.target.nodeName == 'P');
 			$(document).click(function(event) {
-				console.log("here2");
+				//console.log("here2");
 				if (event.target.nodeName == 'P'){
 					var data = $(event.target).attr('id');
 					//console.log(event.target);
@@ -160,19 +162,57 @@ function showDialogAjax() {
 					if (isInt(data)) {
 						id = data;
 					}
-					console.log(id);
-					showaddevent(id);
-				} /*else if (event.target.nodeName == 'LI') {
-					var eventdata = $(event.target.parentNode.previousSibling).attr('id');
-					console.log(event.target.parentNode);
-					console.log(event.target.parentNode.previousSibling);
-					console.log(eventdata);
-					if (isInt(eventdata)) {
-						id = eventdata;
-					}*/
-					//modifyevent(id);
 					//console.log(id);
-				//}
+					showaddevent(id);
+				} else if (event.target.nodeName == 'LI') {
+					var eventid = $(event.target.parentNode.previousSibling).attr('id');
+					console.log(eventid);
+					var eventtitle = event.target.innerHTML.substring(6);
+					//console.log(eventtitle);
+					var eventtime = event.target.innerHTML.substring(0,5);
+					//console.log(eventtime);
+					var eventcat = $(event.target).attr('class');
+					//console.log(eventcat);
+					
+					if (isInt(eventid)) {
+						//console.log("into a wrong if");
+						id = eventid;
+						var numweek = Math.floor(id/10);
+						var numday = id - numweek*10;
+						var weeks = currentMonth.getWeeks()[numweek];
+						var days = weeks.getDates()[numday];
+						var tzoffset = (new Date()).getTimezoneOffset() * 60000; 
+						var localISOTime = (new Date(days - tzoffset)).toISOString().slice(0, -1);
+						var eventdate = (localISOTime.slice(0, 10));
+						//fetchpkofevent(eventtitle, eventtime, eventdate, eventcat);
+						
+						var datetime = eventdate+" "+eventtime+":00";
+						var dataString = "type=fetchpkofevent"+ "&title=" + encodeURIComponent(eventtitle) + "&datetime=" + encodeURIComponent(datetime) + "&cat=" + encodeURIComponent(eventcat);
+						var xmlHttp = new XMLHttpRequest(); 
+						xmlHttp.open("POST", "calendarController.php", true); 
+						xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+						xmlHttp.addEventListener("load", function(event){
+							console.log(event.target.responseText);
+							pkofevent = JSON.parse(event.target.responseText);
+						},false);
+						xmlHttp.send(dataString);	
+						console.log(datetime);
+						//document.getElementById("trial").innerHTML=pkofevent;
+						//document.getElementById("trialtoo").value=pkofevent;
+						//With help from:
+						//https://stackoverflow.com/questions/14845710/javascript-variable-access-in-html
+						//document.getElementById("modpk").value=pkofevent;
+						$("#modevent").dialog();
+					}
+					//console.log("at end of showdialogajax");
+					//var curruser = User::getCurrentUser();
+					//console.log(curruser);
+					//console.log(id);
+					//console.log(event.target);
+					//console.log(event.target.parentNode);
+					//console.log(event.target.parentNode.previousSibling);
+					//console.log(eventid);
+				}
 			});
 		//});
 	//});
@@ -202,17 +242,17 @@ function showlogin() {
 }
 
 function loginregisterAjax() {
-	console.log("here0");
+	//console.log("here0");
 		//$("a").click(function(){
-			console.log("here1");
-			console.log($(event.target).attr('id'));
+			//console.log("here1");
+			//console.log($(event.target).attr('id'));
 			$(document).click(function(event) {
-				console.log("here2");
+				//console.log("here2");
 				if ($(event.target).attr('id') == "login_dialog"){
-					console.log("able to login");
+					//console.log("able to login");
 					showlogin();
 				} else if ($(event.target).attr('id') == "register_dialog") {
-					console.log("able to register");
+					//console.log("able to register");
 					showregister();
 				}
 			});
@@ -223,3 +263,17 @@ function loginregisterAjax() {
 document.getElementById("login_dialog").addEventListener("click", loginregisterAjax, false);
 console.log("after listener");
 document.getElementById("register_dialog").addEventListener("click", loginregisterAjax, false);
+
+//private function fetchpkofevent(title, time, date, cat){
+//	console.log("into fetchpkofevent");
+//	var datetime = date+" "+time+":00";
+//	var dataString = "atype=fetchpkofevent"+ "&title=" + encodeURIComponent(title) + "datetime = " + encodeURIComponent(datetime) + "cat = " + encodeURIComponent(cat);
+//	var xmlHttp = new XMLHttpRequest(); 
+//	xmlHttp.open("POST", "calendarController.php", true); 
+//	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+//	xmlHttp.addEventListener("load", function(event){
+//		console.log(event.target.responseText);
+//		pkofevent = JSON.parse(event.target.responseText);
+//	},false);
+//	xmlHttp.send(dataString);	
+//}
