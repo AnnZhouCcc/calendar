@@ -1,9 +1,38 @@
 <?php
 	class Share{
-		public $share;
-		public $user;
+		public $share; // to
+		public $user; //from
         
 		function __construct(){
+		}
+		
+		static function newShare($from, $to){
+			$share = new Share();
+			$share->user=$from;
+			$share->share = $to;
+			return $share;
+		}
+		
+		static function getShares($to){
+			$result = array();
+			include "global.php";
+			sessionCheckStart();
+			
+			//echo $date;
+			$stmt = $mysqli->prepare("SELECT Users_username FROM Calendar_Share_Access WHERE share_with=?");
+			if(!$stmt){
+				printf("Query Prep Failed: %s\n", $mysqli->error);
+				exit;
+			}
+			$stmt->bind_param('s',$to); //Change this after session use User class
+			$stmt->bind_result($from);
+			$stmt->execute();
+			while($stmt->fetch()){
+				$result[] = Share::newShare($from,$to);
+			}
+			$stmt->close();
+			//echo "I am here";
+			return $result;
 		}
 		
 		static function share($username, $sharename){

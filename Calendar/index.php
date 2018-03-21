@@ -132,15 +132,20 @@
 		<input type="text" id="sharename" placeholder="Who to share with" />
 		<button id="share_btn">Share</button><br><br><br>
 		
-		<script type="text/javascript" src="shareController.js"></script>
+
 		
 		
 		<strong>Categories:</strong><br>
-		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox" checked> <label>work</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox" checked> <label>study</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox" checked> <label>entertainment</label><br>
-		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox" checked> <label>others</label><br>
-		
+		<input type="checkbox" class="categoriesCheckBox" name="workCheckbox" checked> <label class="work">work</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="studyCheckbox" checked> <label class="study">study</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="entertainmentCheckbox" checked> <label class="entertainment">entertainment</label><br>
+		<input type="checkbox" class="categoriesCheckBox" name="othersCheckbox" checked> <label class="others">others</label><br>
+		<br>
+		<strong>Show the calendar of:</strong>
+		<form class="shareCalendar" id="shareCalendar">
+			<input type="radio" name="share" id="<?php echo $_SESSION["username"]?>"><label>me</label>
+		</form>
+		<button type="button" id="refreshShare">Refresh</button>
 	</div>
 
 	<?php
@@ -190,6 +195,7 @@
 	Calendar::showCalendar();
 	?>
 	<div id="scripts">
+		<script type="text/javascript" src="shareController.js"></script>
 		<script type="text/javascript" src="calendarController.js"></script>
 		<script type="text/javascript" src="eventController.js"></script>
 		<script type="text/javascript" src="userController.js"></script>
