@@ -9,7 +9,7 @@ categoriesMap.set("entertainmentCheckbox","entertainment");
 categoriesMap.set("othersCheckbox","others");
 
 // For our purposes, we can keep the current month in a variable in the global scope
-var currentMonth = new Month(2017, 9); // October 2017
+var currentMonth = new Month(2018, 2); // October 2017
 var id = 0;
 var pkofevent = 0;
 

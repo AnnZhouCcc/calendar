@@ -120,4 +120,35 @@ li.entertainment{
 li.others{
 	background-color: #976eff;
 	margin: 1px;
+	
+}
+ul.eventsCheck{
+	list-style-type:none;
+	margin-left: 10%;
+	padding: 0;
+}
+li.othersCheck{
+	background-color: #976eff;
+	margin: 1px;
+	width: 70%;
+}
+li.workCheck{
+	background-color: pink;
+	margin: 1px;
+	width: 70%;
+}
+li.studyCheck{
+	background-color: #97ff6e;
+	margin: 1px;
+	width: 70%;
+}
+li.entertainmentCheck{
+	background-color: #6ec1ff;
+	margin: 1px;
+	width: 70%;
+}
+li.othersCheck{
+	background-color: #976eff;
+	margin: 1px;
+	width: 70%;
 }

@@ -47,6 +47,7 @@ for(var [key,value] of categoriesMap.entries()){
 // This updateCalendar() function only alerts the dates in the currently specified month.  You need to write
 // it to modify the DOM (optionally using jQuery) to display the days and weeks in the current month.
 function updateCalendar(){
+	$("#thisMonth").text(""+(currentMonth.getWeeks()[2].getDates()[0].getMonth()+1)+" "+currentMonth.getWeeks()[2].getDates()[0].getFullYear());
 	var weeks = currentMonth.getWeeks();
 	//console.log(weeks.length);
 	// some month have 5 weeks, some month have 6 weeks. Make all of them have 6 weeks.
@@ -88,7 +89,7 @@ function updateADay(sqlDate,week,day){
 		console.log(event.target.responseText);
 		var eventsData = JSON.parse(event.target.responseText); // parse the JSON into a JavaScript object
 		// if there exist at least one event in this day
-		var dayNode = document.getElementsByName("week"+week+"day"+day)[0];
+		var dayNode = document.getElementById("week"+week+"day"+day);
 		console.log(dayNode+"week"+week+"day"+day);
 		
 		// remove all the childs of current node
@@ -223,7 +224,7 @@ for (var i=0; i<6; i++){
 		const i2 = i;
 		const j2 = j;
 		//console.log(document.getElementsByName("week"+i2+"day"+j2)[0]);
-		document.getElementsByName("week"+i2+"day"+j2)[0].addEventListener("click", showDialogAjax, false);
+		document.getElementById("week"+i2+"day"+j2).addEventListener("click", showDialogAjax, false);
 	}
 }
 
